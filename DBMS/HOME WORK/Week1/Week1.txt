@@ -1,0 +1,30 @@
+SQL> create table dept(DNO varchar2(3) constraint DNO_UNQ_Cons UNIQUE CONSTRAINT D_LIKEDNO_Cons check(DNO LIKE 'D%'),
+  2  DNAME varchar2(10) unique,
+  3  LOCATION varchar2(9)CONSTRAINT VALID_LOC_Cons check(LOCATION IN('BNG','MNG','MUB','HYD','CHN')));
+
+Table created.
+
+SQL> CREATE TABLE EMP(EMPNO NUMBER(4) PRIMARY KEY,
+  2  ENAME varchar2(10),
+  3  JOB varchar2(9) constraint JOB_CHK_Cons check(JOB IN('CLRK','MGR','A.MGR','GM','CEO')),
+  4  MGRID number(4) constraint  MGR_FK_EMPNO_Cons references EMP,
+  5  DATE_BIRTH date,  constraint DB_Less_DBJOIN_Cons check(DATE_BIRTH<DATE_JOIN),
+  6  SAL number(7,2)  constraint SAL_20LMore_Cons check(SAL>20000),
+  7  COMM number(7,2) default 1000,
+  8  DEPTNO VARCHAR2(3) constraint DEPT_FK_DEPT_Cons references DEPT(DNO) ON DELETE CASCADE,
+  9  DATE_JOIN DATE);
+
+Table created.
+
+SQL> create table proj(
+  2  dno varchar2(3)constraint dno_fk_dept_cons REFERENCES dept(DNO) not null,
+  3  prj_no varchar2(5) constraint p_likeprjno_cons check (prj_no like 'p%')not null,
+  4  prj_name varchar2(10),
+  5  prj_credit number(2) constraint prj_credit_range_cons check(prj_credit BETWEEN 1 and 10),
+  6  strt_date date,
+  7  end_date date,constraint end_date_grt_strt_cons check(end_date>strt_date));
+
+Table created.
+
+SQL> 
+SQL> spool off

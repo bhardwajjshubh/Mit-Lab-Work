@@ -1,0 +1,677 @@
+SQL> set serveroutput on
+SQL> declare
+  2  ename emp.ename%type;
+  3  empno emp.empno%type;
+  4  begin
+  5  empno := &empno;
+  6  select ename into ename from emp where empno = empno;
+  7  dbms_output.put_line('ENAME : ' || ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 102
+old   5: empno := &empno;
+new   5: empno := 102;
+declare
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> set serveroutput on;
+SQL> declare
+  2  ename emp.ename%type;
+  3  empno emp.empno%type;
+  4  begin
+  5  empno := &empno;
+  6  select ename into ename from emp where empno = empno;
+  7  dbms_output.put_line('ENAME : ' || ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 102
+old   5: empno := &empno;
+new   5: empno := 102;
+declare
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> set serveroutput on;
+SQL> declare
+  2  ename emp.ename%type;
+  3  empno emp.empno%type;
+  4  begin
+  5  empno := &empno;
+  6  select ename into ename from emp where empno = empno;
+  7  dbms_output.put_line('ENAME : ' || ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 102
+old   5: empno := &empno;
+new   5: empno := 102;
+declare
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> set serveroutput on
+SQL> declare
+  2  ename emp.ename%type;
+  3  empno emp.empno%type;
+  4  begin
+  5  empno:=&empno;
+  6  select ename into ename from emp where empno=empno;
+  7  dbms_output.put_line('ENAME : ' || ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 102
+old   5: empno:=&empno;
+new   5: empno:=102;
+declare
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> set serveroutput on
+SQL> declare
+  2  ename emp.ename%type;
+  3  empno emp.empno%type;
+  4  begin
+  5  empno := &empno;
+  6  select ename into ename from emp where empno=empno;
+  7   dbms_output.put_line('ENAME : ' || ename);
+  8   exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 100
+old   5: empno := &empno;
+new   5: empno := 100;
+declare
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> set serveroutput on
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.empno%type;
+  4  begin
+  5  V_empno := &empno;
+  6  select ename into ename from emp where empno = V_empno;
+  7  dbms_output.put_line('ENAME : ' || V_ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 102
+old   5: V_empno := &empno;
+new   5: V_empno := 102;
+select ename into ename from emp where empno = V_empno;
+                  *
+ERROR at line 6:
+ORA-06550: line 6, column 19: 
+PLS-00201: identifier 'ENAME' must be declared 
+ORA-06550: line 6, column 25: 
+PL/SQL: ORA-00904: : invalid identifier 
+ORA-06550: line 6, column 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> set serveroutput on
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.empno%type;
+  4  begin
+  5  V_empno := &empno;
+  6  select ename into V_ename from emp where empno = V_empno;
+  7  dbms_output.put_line('ENAME : ' || V_ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 
+old   5: V_empno := &empno;
+new   5: V_empno := ;
+V_empno := ;
+           *
+ERROR at line 5:
+ORA-06550: line 5, column 12: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+
+
+SQL> set serveroutput on
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.empno%type;
+  4  begin
+  5  V_empno := &empno;
+  6  select ename into V_ename from emp where empno = V_empno;
+  7  dbms_output.put_line('ENAME : ' || V_ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 102
+old   5: V_empno := &empno;
+new   5: V_empno := 102;
+ENAME : Raviraj                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.empno%type;
+  4  begin
+  5  V_empno := &empno;
+  6  select ename into V_ename from emp where empno = V_empno;
+  7  dbms_output.put_line('ENAME : ' || V_ename);
+  8  exception
+  9  when no_data_found then
+ 10  dbms_output.put_line('ENAME doesnt exist');
+ 11  end;
+ 12  /
+Enter value for empno: 100
+old   5: V_empno := &empno;
+new   5: V_empno := 100;
+ENAME doesnt exist                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  ename emp.ename%type;
+  3  empno emp.emp_no%type;
+  4  deptno emp.deptno%type;
+  5  begin
+  6  deptno := &deptno;
+  7  select ename into ename from emp where deptno = deptno;
+  8  dbms_output.put_line('ENAME : '|| ename);
+  9  exception
+ 10  when too_many_rows then
+ 11  dbms_output.put_line('returning more than one records');
+ 12  end;
+ 13  /
+Enter value for deptno: 'D1'
+old   6: deptno := &deptno;
+new   6: deptno := 'D1';
+empno emp.emp_no%type;
+          *
+ERROR at line 3:
+ORA-06550: line 3, column 11: 
+PLS-00302: component 'EMP_NO' must be declared 
+ORA-06550: line 3, column 7: 
+PL/SQL: Item ignored 
+
+
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.emp_no%type;
+  4  V_deptno emp.deptno%type;
+  5  begin
+  6  V_deptno := &deptno;
+  7  select ename into V_ename from emp where deptno = V_deptno;
+  8  dbms_output.put_line('ENAME : '|| V_ename);
+  9  exception
+ 10  when too_many_rows then
+ 11  dbms_output.put_line('returning more than one records');
+ 12  end;
+ 13  /
+Enter value for deptno: 'D1'
+old   6: V_deptno := &deptno;
+new   6: V_deptno := 'D1';
+V_empno emp.emp_no%type;
+            *
+ERROR at line 3:
+ORA-06550: line 3, column 13: 
+PLS-00302: component 'EMP_NO' must be declared 
+ORA-06550: line 3, column 9: 
+PL/SQL: Item ignored 
+
+
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.empno%type;
+  4  V_deptno emp.deptno%type;
+  5  begin
+  6  V_deptno := &deptno;
+  7  select ename into V_ename from emp where deptno = V_deptno;
+  8  dbms_output.put_line('ENAME : '|| V_ename);
+  9  exception
+ 10  when too_many_rows then
+ 11  dbms_output.put_line('returning more than one records');
+ 12  end;
+ 13  /
+Enter value for deptno: 
+old   6: V_deptno := &deptno;
+new   6: V_deptno := ;
+V_deptno := ;
+            *
+ERROR at line 6:
+ORA-06550: line 6, column 13: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+
+
+SQL> declare
+  2  V_ename emp.ename%type;
+  3  V_empno emp.empno%type;
+  4  V_deptno emp.deptno%type;
+  5  begin
+  6  V_deptno := &deptno;
+  7  select ename into V_ename from emp where deptno = V_deptno;
+  8  dbms_output.put_line('ENAME : '|| V_ename);
+  9  exception
+ 10  when too_many_rows then
+ 11  dbms_output.put_line('returning more than one records');
+ 12  end;
+ 13  /
+Enter value for deptno: 'D1'
+old   6: V_deptno := &deptno;
+new   6: V_deptno := 'D1';
+returning more than one records                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  p number(10);
+  3  rate number(5);
+  4  year number(4);
+  5  error_low exception;
+  6  begin
+  7  p := & Principal;
+  8  rate := & intrest;
+  9  year := &year;
+ 10  if p <=1000 or rate < 5 or year < 1 then
+ 11  raise error_low;
+ 12  end if;
+ 13  exception
+ 14  when error_low then
+ 15  dbms_output.put_line('Principle amount should be > 1000, interest rate > 5 and year > 1');
+ 16  end;
+ 17  /
+Enter value for principal: 1000
+old   7: p := & Principal;
+new   7: p := 1000;
+Enter value for intrest: 10
+old   8: rate := & intrest;
+new   8: rate := 10;
+Enter value for year: 1
+old   9: year := &year;
+new   9: year := 1;
+Principle amount should be > 1000, interest rate > 5 and year > 1               
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  p number(10);
+  3  rate number(5);
+  4  year number(4);
+  5  error_low exception;
+  6  begin
+  7  p := & Principal;
+  8  rate := & intrest;
+  9  year := &year;
+ 10  if p <=1000 or rate < 5 or year < 1 then
+ 11  raise error_low;
+ 12  end if;
+ 13  exception
+ 14  when error_low then
+ 15  dbms_output.put_line('Principle amount should be > 1000, interest rate > 5 and year > 1');
+ 16  end;
+ 17  /
+Enter value for principal: 1500
+old   7: p := & Principal;
+new   7: p := 1500;
+Enter value for intrest: 6
+old   8: rate := & intrest;
+new   8: rate := 6;
+Enter value for year: 2
+old   9: year := &year;
+new   9: year := 2;
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select emp_no,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(ename || 'draws salary :' || sal );
+ 10  if sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 125
+old   7: V_empno :=&empno;
+new   7: V_empno :=125;
+select emp_no,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+       *
+ERROR at line 8:
+ORA-06550: line 8, column 8: 
+PL/SQL: ORA-00904: "EMP_NO": invalid identifier 
+ORA-06550: line 8, column 1: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 9, column 22: 
+PLS-00201: identifier 'ENAME' must be declared 
+ORA-06550: line 9, column 1: 
+PL/SQL: Statement ignored 
+ORA-06550: line 10, column 4: 
+PLS-00201: identifier 'SAL' must be declared 
+ORA-06550: line 10, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select empno,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(ename || 'draws salary :' || sal );
+ 10  if sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 125
+old   7: V_empno :=&empno;
+new   7: V_empno :=125;
+dbms_output.put_line(ename || 'draws salary :' || sal );
+                     *
+ERROR at line 9:
+ORA-06550: line 9, column 22: 
+PLS-00201: identifier 'ENAME' must be declared 
+ORA-06550: line 9, column 1: 
+PL/SQL: Statement ignored 
+ORA-06550: line 10, column 4: 
+PLS-00201: identifier 'SAL' must be declared 
+ORA-06550: line 10, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select empno,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(V_ename || 'draws salary :' || V_sal );
+ 10  if sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 125
+old   7: V_empno :=&empno;
+new   7: V_empno :=125;
+if sal<25000 then
+   *
+ERROR at line 10:
+ORA-06550: line 10, column 4: 
+PLS-00201: identifier 'SAL' must be declared 
+ORA-06550: line 10, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select empno,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(V_ename || 'draws salary :' || V_sal );
+ 10  if V_sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 
+old   7: V_empno :=&empno;
+new   7: V_empno :=;
+V_empno :=;
+          *
+ERROR at line 7:
+ORA-06550: line 7, column 11: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+
+
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select empno,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(V_ename || 'draws salary :' || V_sal );
+ 10  if V_sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 125
+old   7: V_empno :=&empno;
+new   7: V_empno :=125;
+Manudraws salary :55000                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR              111 10-OCT-85      32000      13200 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK             106 10-DEC-80      24000       5400 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM               150 10-DEC-74      45000      13500      
+03-DEC-85                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Sai        CEO                  10-DEC-70      60000      36000      
+03-DEC-90                                                                       
+                                                                                
+       103 Krishna    CLRK             111 10-DEC-80      78000       8000 D1   
+17-OCT-01 P1                                                                    
+                                                                                
+       151 Raghav     CLRK             111 02-OCT-80      25000       7500 D1   
+02-OCT-02 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR            150 10-DEC-80      55000      25500 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Manish     CLRK             125 02-OCT-80      30000      12000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Suresh     MGR              111 02-OCT-86      50000      15000 D2   
+02-OCT-99 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     MGR              111 10-DEC-74      35000      13500 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       152 Vignesh    CLRK             111 10-DEC-80      27000       8700 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       108 Ramesh     CLRK             106 10-DEC-70      26000       7600 D6   
+02-OCT-85 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       153 Vishwas    CLRK             106 10-DEC-80      28000            D5   
+10-DEC-00 P1                                                                    
+                                                                                
+       157 Vivan      CLRK             111 10-DEC-00      26000      22600 D4   
+02-AUG-23 P2                                                                    
+                                                                                
+
+14 rows selected.
+
+SQL> 
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select empno,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(V_ename || 'draws salary :' || V_sal );
+ 10  if V_sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 125
+old   7: V_empno :=&empno;
+new   7: V_empno :=125;
+Manudraws salary :55000                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  V_empno emp.empno%type;
+  3  V_ename emp.ename%type;
+  4  V_sal emp.sal%type;
+  5  error_low exception;
+  6  begin
+  7  V_empno :=&empno;
+  8  select empno,ename,sal into V_empno,V_ename,V_sal from emp where empno = V_empno;
+  9  dbms_output.put_line(V_ename || 'draws salary :' || V_sal );
+ 10  if V_sal<25000 then
+ 11  raise error_low;
+ 12  end if;
+ 13  update emp set sal = 25000 where empno = V_empno;
+ 14  exception
+ 15  when no_data_found then
+ 16  dbms_output.put_line('empno doesnt exist');
+ 17  when error_low then
+ 18  dbms_output.put_line('salary more than 25000');
+ 19  end;
+ 20  /
+Enter value for empno: 100
+old   7: V_empno :=&empno;
+new   7: V_empno :=100;
+empno doesnt exist                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

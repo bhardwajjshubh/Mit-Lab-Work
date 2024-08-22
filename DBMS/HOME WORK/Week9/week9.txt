@@ -1,0 +1,133 @@
+9.1 Write a PL/SQL program to demonstrate predefined exceptionsINVALID_NUMBER, TOO_MANY_ROWS, NO-DATA_FOUND. Do following operations in the PL/SQL block and handle pre-defined exceptions correspondingly by 
+displaying proper messages.
+- Convert ename into number using to_number( ) function
+- Display ename of employee corresponding to user entered empno. Handle 
+exception if entered empno does not exists.
+- Display ename of employee corresponding to user entered deptno. Handle 
+exception.
+
+
+ set serveroutput on
+ declare
+       v_ename emp.ename%type;
+       v_empno emp.empno%type;
+       begin
+       v_empno := &empno;
+       select ename into v_ename from emp where empno = v_empno;
+       dbms_output.put_line('ENAME : ' || v_ename);
+       exception
+       when no_data_found then
+     dbms_output.put_line('ENAME doesnt exist');
+     end;
+     /
+Enter value for empno: 111
+old   5:    v_empno := &empno;
+new   5:    v_empno := 111;
+ENAME : Raghu
+
+PL/SQL procedure successfully completed.
+
+  declare
+        ename emp.ename%type;
+        empno emp.empno%type;
+        deptno emp.deptno%type;
+        begin
+        deptno := &deptno;
+        select ename into ename from emp where deptno = deptno;
+        dbms_output.put_line('ENAME : '|| ename);
+        exception
+      when too_many_rows then
+      dbms_output.put_line('returning more than one records');
+      end;
+      /
+
+Enter value for deptno: 'D1'
+old   6:     deptno := &deptno;
+new   6:     deptno := 'D1';
+returning more than one records
+
+PL/SQL procedure successfully completed.
+
+********************************************************************************************************************
+
+9.2 Write a PL/SQL block to accept, Principle, Interest rate and duration (in years) to calculate Interest to be paid. Handle the exceptions if Principle <=1000, interest rate <5, year <1 and display proper error message for each.
+
+  declare
+        p number(10);
+        rate number(5);
+        year number(4);
+        error_low exception;
+        begin
+        p := & Principal;
+        rate := & intrest;
+        year := &year;
+      if p <=1000 or rate < 5 or year < 1 then
+      raise error_low;
+      end if;
+      exception
+      when error_low then
+      dbms_output.put_line('Principle amount should be > 1000, interest rate > 5 and year > 1');
+      end;
+       /
+Enter value for principal: 1000
+old   7:     p := & Principal;
+new   7:     p := 1000;
+Enter value for intrest: 5
+old   8:     rate := & intrest;
+new   8:     rate := 5;
+Enter value for year: 5
+old   9:     year := &year;
+new   9:     year := 5;
+Principle amount should be > 1000, interest rate > 5 and year > 1
+
+PL/SQL procedure successfully completed.
+
+Enter value for principal: 12000
+old   7:     p := & Principal;
+new   7:     p := 12000;
+Enter value for intrest: 6
+old   8:     rate := & intrest;
+new   8:     rate := 6;
+Enter value for year: 6
+old   9:     year := &year;
+new   9:     year := 6;
+
+PL/SQL procedure successfully completed.
+
+
+********************************************************************************************************************
+
+9.3 Write a PL/SQL block to accept employee number from user and display employee details such as Empno, Name, and Sal. Handle the exception raised through user defined messages –
+(i) If user entered a non–existing employee number. (ii) If the salary more than 25000/- If employee exists and salary is less than 25000/- then update that salary to 25000/-
+
+ set serveroutput on;
+ 
+
+ DECLARE
+        emp_rec emp%rowtype;
+        sal_error exception;
+    BEGIN
+        emp_rec.empno:=&empno;
+        select * into emp_rec from emp where empno=emp_rec.empno;
+        if emp_rec.sal>25000 then raise sal_error;
+        ELSE
+            dbms_output.put_line('Employee salary before update: '||emp_rec.sal);
+           update emp set sal=25000 where empno=emp_rec.empno;
+       end if;
+       dbms_output.put_line('Employee Details');
+       dbms_output.put_line('Empno: '||emp_rec.empno||'  Name: '||emp_rec.ename||' Updated salary: 25000');
+   EXCEPTION
+       when sal_error THEN dbms_output.put_line('Employee salary is more than 25000');
+       when no_data_found then dbms_output.put_line('Employee id not found');
+   end;
+   /
+Enter value for empno: 111
+Employee salary before update: 25000
+Employee Details
+Empno: 111  Name: Raghu Updated salary: 25000
+
+Enter value for empno: 150
+Employee salary is more than 25000
+
+PL/SQL procedure successfully completed.
+

@@ -1,0 +1,232 @@
+/*Design the classes using following hierarchical inheritance teaching. Each class has
+ * member functions accept and display. Write a program to accept details of n
+ * instructors and display the details.
+ * Name : Shubham Kumar
+ * Reg No - 230970035
+ * Date : 16-10-2023*/
+
+#include<iostream>
+using namespace std;
+
+class Person{
+        protected:
+        int id;
+        char name[20];
+                void getData(){
+                        cout<<"Enter ID: ";
+                        cin>>id;
+                        cout<<"Enter name: ";
+                        cin>>name;
+                }
+                void display(){
+                        cout<<"\nID: "<<id<<"\nName: "<<name;
+                }
+};
+
+class Teaching:protected Person{
+        char subject[20],name[20];
+        public:void getData(){
+                        cout<<"Enter id: ";
+                        cin>>id;
+                        cout<<"Enter name: ";
+                        cin>>name;
+                        cout<<"Enter subject name: ";
+                        cin>>subject;
+                }
+                void display(){
+                        cout<<"\nID: "<<id<<"\nName: "<<name<<"\nSubject: "<<subject;
+                }
+};
+class Instructor:protected Person{
+        public:void display(){
+                       Person::display();
+                       cout<<"\n";
+               }
+               void getData(){
+                       Person::getData();
+                       cout<<"\n";
+               }
+};
+class NonTeaching:protected Person{
+        char dept[20];
+        public: void getData(){
+                        Person::getData();
+                        cout<<"Enter department name: ";
+                        cin>>dept;
+                        cout<<"\n";
+                }
+                void display(){
+                        Person::display();
+                        cout<<"\nDepartment: "<<dept<<"\n";
+                }
+};
+
+int main(){
+        Instructor ins[20];
+        Teaching t[20];
+        NonTeaching nt[20];
+        int n;
+        cout<<"\nEnter number of instructor: ";
+        cin>>n;
+        for(int i=0;i<n;i++)
+                ins[i].getData();
+        cout<<"----------------Instructors Information---------------\n";
+        for(int i=0;i<n;i++)
+                ins[i].display();
+        cout<<"\nEnter number of teachers: ";
+        cin>>n;
+        for(int i=0;i<n;i++)
+                t[i].getData();
+        cout<<"\n---------Teaching staffs Information---------------\n";
+        for(int i=0;i<n;i++)
+                t[i].display();
+        cout<<"\n\nEnter number of non teaching staff: ";
+        cin>>n;
+        for(int i=0;i<n;i++)
+                nt[i].getData();
+        cout<<"\n--------------Non Teaching staffs Information------------------\n";
+        for(int i=0;i<n;i++)
+                nt[i].display();
+        return 0;
+}
+
+
+
+
+
+/*Consider a college that maintains records of its employees. The hierarchical
+ * relationship of this employee database is divided into a number of classes as shown
+ * in the figure given below. It contains the data needed for each class. Define
+ * functions to create the database and retrieve information as needed.
+ * Name - Shubham Kumar
+ * Reg No. - 230970035
+ * Date - 16-10-2023*/
+
+#include <iostream>
+using namespace std;
+
+class Employee
+{
+protected:
+    int emp_code;
+    char emp_name[20];
+
+public:
+    void setData()
+    {
+        cout << "Enter emp code: ";
+        cin >> emp_code;
+        cout << "Enter Employee Name: ";
+        cin >> emp_name;
+    }
+
+    void getData()
+    {
+        cout << "Employee code: " << emp_code << endl;
+        cout << "Employee name: " << emp_name << endl;
+    }
+};
+
+class Faculty : public Employee
+{
+protected:
+    char qualification[20];
+    int experience;
+
+public:
+    void setData()
+    {
+        Employee::setData();
+        cout << "Enter Qualification: ";
+        cin >> qualification;
+        cout << "Enter Experience: ";
+        cin >> experience;
+    }
+
+    void getData()
+    {
+        Employee::getData();
+        cout << "Qualification: " << qualification << endl;
+        cout << "Experience: " << experience << " years" << endl;
+    }
+};
+
+class Non_teaching : public Employee
+{
+    char grade;
+
+public:
+    void setData()
+    {
+        Employee::setData();
+        cout << "Enter Grade: ";
+        cin >> grade;
+    }
+
+    void getData()
+    {
+        Employee::getData();
+        cout << "Grade: " << grade << endl;
+    }
+};
+
+class Permanent : public Faculty
+{
+    float basicPay;
+    float acadAllowance;
+
+public:
+    void setData()
+    {
+        Faculty::setData();
+        cout << "Enter Basic Pay: ";
+        cin >> basicPay;
+        cout << "Enter Academic Allowance: ";
+        cin >> acadAllowance;
+    }
+
+    void getData()
+    {
+        Faculty::getData();
+        cout << "Basic Pay: " << basicPay << endl;
+        cout << "Academic Allowance: " << acadAllowance << endl;
+    }
+};
+
+class Contract : public Faculty
+{
+    int probationYear;
+
+public:
+    void setData()
+    {
+        Faculty::setData();
+        cout << "Enter Probation Year: ";
+        cin >> probationYear;
+    }
+
+    void getData()
+    {
+        Faculty::getData();
+        cout << "Probation Year: " << probationYear << " years" << endl;
+    }
+};
+
+int main()
+{
+    Contract p1;
+    p1.setData();
+    cout << "\n------------Contract Data is------------ " << endl;
+    p1.getData();
+
+    cout << "------------Permanent Data-------------" << endl;
+    Permanent p;
+    p.setData();
+    p.getData();
+
+    cout << "--------------Non-Teaching Data----------------" << endl;
+    Non_teaching n1;
+    n1.setData();
+    n1.getData();
+    return 0;
+}

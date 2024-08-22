@@ -1,0 +1,41 @@
+2.1 Make the combination of DNO and PRJ_NO as primary key in the table PROJ.
+
+SQL> alter table proj add primary key(dno,prj_no);
+
+Table altered.
+
+**********************************************************************************************
+2.2 Add a column to EMP table named PRJ_ID. Add a foreign key constraint to EMP table on (DeptNo, Proj_Id) referencing PROJ. (Indicates an employee from which department is working on which project/s.)
+
+SQL> alter table emp add (proj_id varchar2(10));
+
+Table altered.
+
+SQL> alter table emp add foreign key(deptno,proj_id) references proj;
+
+Table altered.
+
+**********************************************************************************************
+2.3 Add constraints(VALID_EMPNO_Cons) to the EMP table to check the EMPNO >100
+
+SQL> alter table emp add constraint valid_empno_cons2 check(empno>100);
+
+Table altered.
+
+**********************************************************************************************
+2.4 Add a new column Dept_Budget column of size 7 digits to the DEPT table.
+
+SQL> alter table dept add dept_budget number(7);
+
+Table altered.
+
+**********************************************************************************************
+2.5 Add a new column Prj_Fund column of size 7 digits to the PROJ table.
+
+SQL> alter table proj add proj_fund number(7);
+
+Table altered.
+
+**********************************************************************************************
+
+SQL> spool off;

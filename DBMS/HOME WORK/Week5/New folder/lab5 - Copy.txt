@@ -1,0 +1,64 @@
+5.1
+ select min(sal) as min_sal,max(sal) as max_sal,avg(sal) as avg_sal,sum(sal) as total_sal from emp;
+
+   MIN_SAL    MAX_SAL    AVG_SAL  TOTAL_SAL
+---------- ---------- ---------- ----------
+     21000      60000 42769.2308     556000
+5.2
+select prj_name from proj,dept where proj.dno=dept.dno and dname='Marketing';
+
+PRJ_NAME
+----------
+robotics
+CG
+
+5.3
+select upper(ename) as capital,
+  2     lower(ename) as lowerr,
+  3    initcap(ename) as first_cap,
+  4      substr(ename,2,3) as sec_position,
+  5    length(ename) as length from emp;
+
+CAPITAL    LOWERR     FIRST_CAP  SEC_POSITION     LENGTH
+---------- ---------- ---------- ------------ ----------
+RAVI       ravi       Ravi       avi                   4
+RAVIRAJ    raviraj    Raviraj    avi                   7
+RAGHU      raghu      Raghu      agh                   5
+RAGHAV     raghav     Raghav     agh                   6
+RAMESH     ramesh     Ramesh     ame                   6
+SAMESH     samesh     Samesh     ame                   6
+
+5.4
+select ename from emp where mgrid in(select empno from emp where ename='Raghu');
+
+ENAME
+----------
+Ravi
+Ramesh
+Samesh
+Manish
+Mahima
+
+5.5
+ select dname,max(sal),min(sal) from dept,emp where dept.dno=emp.deptno group by dn
+ame;
+
+DNAME        MAX(SAL)   MIN(SAL)
+---------- ---------- ----------
+Marketing       60000      21000
+HR              55000      30000
+Research        57000      57000
+IT              35000      35000
+
+5.6
+select count(empno),dname from emp,dept where emp.deptno=dept.dno group by dname;
+
+COUNT(EMPNO) DNAME
+------------ ----------
+           6 Marketing
+           2 HR
+           2 Research
+           1 IT
+		   
+5.7
+

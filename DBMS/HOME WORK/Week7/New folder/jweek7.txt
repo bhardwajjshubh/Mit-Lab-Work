@@ -1,0 +1,95 @@
+set server output on;
+
+7.1 Write a PL/SQL block to find the sum of the digits of a given number.
+
+
+declare
+
+	n number := &n;
+	add number := 0;
+	i number;
+
+begin
+
+	dbms_output.put_line('Given number is: '||n);
+	for i in 1..n loop
+		
+		add := add + mod(n,10);
+		n := trunc(n/10);
+	end loop;
+	dbms_output.put_line('Sum : '||add);
+
+end;
+/
+
+Enter value for n: 345
+old   3:        n number := &n;
+new   3:        n number := 345;
+Given number is: 345
+Sum : 12
+
+===========================================================
+
+7.2 Write a PL/SQL block to check an input string is palindrome or not palindrome.
+
+declare
+	str varchar(10) :=&str;
+	temp varchar(10);
+	l number;
+	i number;
+begin
+	l := length(str);
+	dbms_output.put_line('Original String: '||str);
+	
+	for i in 1..l 
+	loop
+	
+		temp := temp || substr(str,l,1);
+		
+		if l=0 then
+			exit;
+		end if;
+		l := l-1;
+		
+	end loop;
+
+
+	if str = temp then
+		dbms_output.put_line('Palindrome');
+	else
+		dbms_output.put_line('Not palindrome');
+	end if;
+end;
+/
+Enter value for str: 'arora'
+old   2:        str varchar(10) :=&str;
+new   2:        str varchar(10) :='arora';
+
+Original String: arora
+Palindrome
+
+PL/SQL procedure successfully completed.
+
+====================================================
+
+7.3 Write a PL/SQL block to accept employee number and display Employee Name, Department name, salary of employees in the format – ‘RAVI works in Marketing department and draws 32000/- as salary’.
+
+
+declare
+	v_eno number(4) := &employee_number;
+	v_empname emp.ename%type;
+	v_depname dept.dname%type;
+	v_sal emp.sal%type;
+begin
+	select ename,dname,sal into v_empname,v_depname,v_sal from emp,dept where emp.deptno = dept.dno and	empno = v_eno;
+
+	dbms_output.put_line(v_empname||' works in '||v_depname||' department and draws '||v_sal||'/- as salary');
+end;
+/
+
+Enter value for employee_number: 111
+old   2:        v_eno number(4) := &employee_number;
+new   2:        v_eno number(4) := 111;
+Raghu works in IT department and draws 45000/- as salary
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,519 @@
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor emp_sal is
+  3  select ename, sal from emp where sal>30000;
+  4  
+  5  name emp.ename%type;
+  6  sal emp.sal%type;
+  7  begin
+  8  open emp_sal;
+  9  loop
+ 10  fetch emp_sal into name, sal;
+ 11  dbms_output.put_line('name: ' || name || ' sal : ' || sal );
+ 12  exit when emp_sal%notfound;
+ 13  end loop;
+ 14  close emp_sal;
+ 15  end;
+ 16  /
+name: Ravi sal : 32000                                                          
+name: Raghu sal : 45000                                                         
+name: Sai sal : 60000                                                           
+name: Manu sal : 55000                                                          
+name: Suresh sal : 50000                                                        
+name: Mahesh sal : 35000                                                        
+name: Mahesh sal : 35000                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> select ename, sal from emp where sal>30000;
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+Ravi            32000                                                           
+Raghu           45000                                                           
+Sai             60000                                                           
+Manu            55000                                                           
+Suresh          50000                                                           
+Mahesh          35000                                                           
+
+6 rows selected.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor emp_sal is
+  3  select ename, sal from emp where sal>30000;
+  4  name emp.ename%type;
+  5  sal emp.sal%type;
+  6  begin
+  7  open emp_sal;
+  8  loop
+  9  fetch emp_sal into name, sal;
+ 10  exit when emp_sal%notfound;
+ 11  dbms_output.put_line('name: ' || name || ' sal : ' || sal );
+ 12  end loop;
+ 13  close emp_sal;
+ 14  end;
+ 15  /
+name: Ravi sal : 32000                                                          
+name: Raghu sal : 45000                                                         
+name: Sai sal : 60000                                                           
+name: Manu sal : 55000                                                          
+name: Suresh sal : 50000                                                        
+name: Mahesh sal : 35000                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor cur_emp(emp_job varchar2,emp_dno varchar2) is
+  3  select emp_no,ename,job,sal,deptno from emp
+  4  where job = emp_job and deptno = emp_dno;
+  5  
+  6  begin
+  7  for i in cur_emp(&emp_job,&emp_dno)
+  8  loop
+  9  dbms_output.put_line( '(' ||i.emp_no || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+ 10  end loop;
+ 11  end;
+ 12  /
+Enter value for emp_job: 'MGR'
+Enter value for emp_dno: 'D2'
+old   7: for i in cur_emp(&emp_job,&emp_dno)
+new   7: for i in cur_emp('MGR','D2')
+select emp_no,ename,job,sal,deptno from emp
+       *
+ERROR at line 3:
+ORA-06550: line 3, column 8: 
+PL/SQL: ORA-00904: "EMP_NO": invalid identifier 
+ORA-06550: line 3, column 1: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 9, column 29: 
+PLS-00364: loop index variable 'I' use is invalid 
+ORA-06550: line 9, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor cur_emp(emp_job varchar2,emp_dno varchar2) is
+  3  select empno,ename,job,sal,deptno from emp
+  4  where job = emp_job and deptno = emp_dno;
+  5  
+  6  begin
+  7  for i in cur_emp(&emp_job,&emp_dno)
+  8  loop
+  9  dbms_output.put_line( '(' ||i.emp_no || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+ 10  end loop;
+ 11  end;
+ 12  /
+Enter value for emp_job: 
+Enter value for emp_dno: 
+old   7: for i in cur_emp(&emp_job,&emp_dno)
+new   7: for i in cur_emp(,)
+for i in cur_emp(,)
+                 *
+ERROR at line 7:
+ORA-06550: line 7, column 18: 
+PLS-00103: Encountered the symbol "," when expecting one of the following: 
+( ) - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+table continue avg count current exists max min prior sql 
+stddev sum variance execute multiset the both leading 
+trailing forall merge year month day hour minute second 
+timezone_hour timezone_minute timezone_region timezone_abbr 
+time timestamp interval date 
+<a string literal with character set specification> 
+
+
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor cur_emp(emp_job varchar2,emp_dno varchar2) is
+  3  select empno,ename,job,sal,deptno from emp
+  4  where job = emp_job and deptno = emp_dno;
+  5  
+  6  begin
+  7  for i in cur_emp(&emp_job,&emp_dno)
+  8  loop
+  9  dbms_output.put_line( '(' ||i.emp_no || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+ 10  end loop;
+ 11  end;
+ 12  /
+Enter value for emp_job: 
+Enter value for emp_dno: 
+old   7: for i in cur_emp(&emp_job,&emp_dno)
+new   7: for i in cur_emp(,)
+for i in cur_emp(,)
+                 *
+ERROR at line 7:
+ORA-06550: line 7, column 18: 
+PLS-00103: Encountered the symbol "," when expecting one of the following: 
+( ) - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+table continue avg count current exists max min prior sql 
+stddev sum variance execute multiset the both leading 
+trailing forall merge year month day hour minute second 
+timezone_hour timezone_minute timezone_region timezone_abbr 
+time timestamp interval date 
+<a string literal with character set specification> 
+
+
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor cur_emp(emp_job varchar2,emp_dno varchar2) is
+  3  select empno,ename,job,sal,deptno from emp
+  4  where job = emp_job and deptno = emp_dno;
+  5  
+  6  begin
+  7  for i in cur_emp(&emp_job,&emp_dno)
+  8  loop
+  9  dbms_output.put_line( '(' ||i.emp_no || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+ 10  end loop;
+ 11  end;
+ 12  /
+Enter value for emp_job: 'MGR'
+Enter value for emp_dno: 'D2'
+old   7: for i in cur_emp(&emp_job,&emp_dno)
+new   7: for i in cur_emp('MGR','D2')
+dbms_output.put_line( '(' ||i.emp_no || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+                              *
+ERROR at line 9:
+ORA-06550: line 9, column 31: 
+PLS-00302: component 'EMP_NO' must be declared 
+ORA-06550: line 9, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> set serveroutput on;
+SQL> declare
+  2  cursor cur_emp(emp_job varchar2,emp_dno varchar2) is
+  3  select empno,ename,job,sal,deptno from emp
+  4  where job = emp_job and deptno = emp_dno;
+  5  
+  6  begin
+  7  for i in cur_emp(&emp_job,&emp_dno)
+  8  loop
+  9  dbms_output.put_line( '(' ||i.empno || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+ 10  end loop;
+ 11  end;
+ 12  /
+Enter value for emp_job: 'MGR'
+Enter value for emp_dno: 'D2'
+old   7: for i in cur_emp(&emp_job,&emp_dno)
+new   7: for i in cur_emp('MGR','D2')
+(106 , Suresh , MGR , D2 )                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> select ename,sal,dname from emp e, dept d where e.deptno = d.dno and prj_id = 'P1';
+
+ENAME             SAL DNAME                                                     
+---------- ---------- ----------                                                
+Ravi            32000 Marketing                                                 
+Krishna         30000 Marketing                                                 
+Raghav          25000 Marketing                                                 
+Manish          30000 Research                                                  
+Suresh          50000 Research                                                  
+Vishwas         28000 Accounts                                                  
+
+6 rows selected.
+
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and sal = (select max(sal) from emp) and prj_id='P1';
+
+no rows selected
+
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and sal = (select max(sal) from emp) and prj_id='P2';
+
+no rows selected
+
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and sal = (select max(sal) from emp) and prj_id='P3';
+
+no rows selected
+
+SQL> select date_birth from emp;
+
+DATE_BIRT                                                                       
+---------                                                                       
+10-OCT-85                                                                       
+10-DEC-80                                                                       
+10-DEC-74                                                                       
+10-DEC-70                                                                       
+10-DEC-80                                                                       
+02-OCT-80                                                                       
+10-DEC-80                                                                       
+02-OCT-80                                                                       
+02-OCT-86                                                                       
+10-DEC-74                                                                       
+10-DEC-80                                                                       
+
+DATE_BIRT                                                                       
+---------                                                                       
+10-DEC-70                                                                       
+10-DEC-80                                                                       
+10-DEC-00                                                                       
+
+14 rows selected.
+
+SQL> select ename from emp fetch first 1 row only;
+
+ENAME                                                                           
+----------                                                                      
+Ravi                                                                            
+
+SQL> select ename from emp fetch first 2 row only;
+
+ENAME                                                                           
+----------                                                                      
+Ravi                                                                            
+Raviraj                                                                         
+
+SQL> 
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and sal = (select max(sal) from emp) and prj_id='P1' fetch first 2 rows only;
+
+no rows selected
+
+SQL> select ename,sal,dname from emp e,dept d where e.deptno=d.dno and sal=(select max(sal) from emp) and prj_id='P1';
+
+no rows selected
+
+SQL> select ename,sal from emp;
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+Ravi            32000                                                           
+Raviraj         24000                                                           
+Raghu           45000                                                           
+Sai             60000                                                           
+Krishna         30000                                                           
+Raghav          25000                                                           
+Manu            55000                                                           
+Manish          30000                                                           
+Suresh          50000                                                           
+Mahesh          35000                                                           
+Vignesh         27000                                                           
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+Ramesh          26000                                                           
+Vishwas         28000                                                           
+Vivan           26000                                                           
+
+14 rows selected.
+
+SQL> select ename,sal,prj_id from emp;
+
+ENAME             SAL PRJ_I                                                     
+---------- ---------- -----                                                     
+Ravi            32000 P1                                                        
+Raviraj         24000 P3                                                        
+Raghu           45000                                                           
+Sai             60000                                                           
+Krishna         30000 P1                                                        
+Raghav          25000 P1                                                        
+Manu            55000 P2                                                        
+Manish          30000 P1                                                        
+Suresh          50000 P1                                                        
+Mahesh          35000 P2                                                        
+Vignesh         27000 P3                                                        
+
+ENAME             SAL PRJ_I                                                     
+---------- ---------- -----                                                     
+Ramesh          26000 P3                                                        
+Vishwas         28000 P1                                                        
+Vivan           26000 P2                                                        
+
+14 rows selected.
+
+SQL> update emp set sal=78000 where ename='Krishna';
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ename,sal from emp;
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+Ravi            32000                                                           
+Raviraj         24000                                                           
+Raghu           45000                                                           
+Sai             60000                                                           
+Krishna         78000                                                           
+Raghav          25000                                                           
+Manu            55000                                                           
+Manish          30000                                                           
+Suresh          50000                                                           
+Mahesh          35000                                                           
+Vignesh         27000                                                           
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+Ramesh          26000                                                           
+Vishwas         28000                                                           
+Vivan           26000                                                           
+
+14 rows selected.
+
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and sal = (select max(sal) from emp) and prj_id='P1';
+
+ENAME             SAL DNAME                                                     
+---------- ---------- ----------                                                
+Krishna         78000 Marketing                                                 
+
+SQL> select ename from emp fetch first 1 row only;
+
+ENAME                                                                           
+----------                                                                      
+Ravi                                                                            
+
+SQL>  select ename from emp fetch first 2 row only;
+
+ENAME                                                                           
+----------                                                                      
+Ravi                                                                            
+Raviraj                                                                         
+
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and sal = (select max(sal) from emp) and prj_id='P1' fetch first 2 rows only;
+
+ENAME             SAL DNAME                                                     
+---------- ---------- ----------                                                
+Krishna         78000 Marketing                                                 
+
+SQL> select ename, sal, dname from emp e , dept d where e.deptno = d.dno and prj_id='P1' fetch first 2 rows only;
+
+ENAME             SAL DNAME                                                     
+---------- ---------- ----------                                                
+Ravi            32000 Marketing                                                 
+Krishna         78000 Marketing                                                 
+
+SQL>  select ename, sal, dname from emp e , dept d where e.deptno = d.dno and prj_id='P1' order by sal desc fetch first 2 rows only;
+
+ENAME             SAL DNAME                                                     
+---------- ---------- ----------                                                
+Krishna         78000 Marketing                                                 
+Suresh          50000 Research                                                  
+
+SQL> select max(sal) from emp where prj_id='P1';
+
+  MAX(SAL)                                                                      
+----------                                                                      
+     78000                                                                      
+
+SQL> select sal from emp where prj_id='P1';
+
+       SAL                                                                      
+----------                                                                      
+     32000                                                                      
+     78000                                                                      
+     25000                                                                      
+     30000                                                                      
+     50000                                                                      
+     28000                                                                      
+
+6 rows selected.
+
+SQL> declare
+  2  cursor emp_prj(project_id varchar) is
+  3  select ename, sal, dname from emp e , dept d where e.deptno = d.dno and prj_id= project_id
+  4  order by sal desc fetch first 2 rows only;
+  5  begin
+  6  for i in emp_prj(&project_id)
+  7  loop
+  8  dbms_output.put_line( '(' ||i.ename || ' , ' || i.sal || ' , ' || i.dname || ' ) ' );
+  9  
+ 10  end loop;
+ 11  end;
+ 12  /
+Enter value for project_id: 'P1'
+old   6: for i in emp_prj(&project_id)
+new   6: for i in emp_prj('P1')
+(Krishna , 78000 , Marketing )                                                  
+(Suresh , 50000 , Research )                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> select max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno);
+
+MAX(AVG_SAL)                                                                    
+------------                                                                    
+       40500                                                                    
+
+SQL> select max(avg_sal) from (select dno, avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno);
+
+MAX(AVG_SAL)                                                                    
+------------                                                                    
+       40500                                                                    
+
+SQL> select dname from dept where dno = ( select deptno from emp where prj_id = 'P1' group by deptno
+  2  having count(deptno)>=all(select count(deptno) from emp where prj_id = 'P1' group by deptno));
+
+DNAME                                                                           
+----------                                                                      
+Marketing                                                                       
+
+SQL> select count(deptno) from emp where prj_id = 'P1' group by deptno;
+
+COUNT(DEPTNO)                                                                   
+-------------                                                                   
+            3                                                                   
+            2                                                                   
+            1                                                                   
+
+SQL> select dname from dept where dno = ( select deptno from emp where prj_id = 'P1' group by deptno
+  2  having count(deptno)=(select max(count(deptno)) from emp where prj_id = 'P1' group by deptno));
+
+DNAME                                                                           
+----------                                                                      
+Marketing                                                                       
+
+SQL> select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno);
+select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno)
+       *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier 
+
+
+SQL> select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno);
+select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno)
+       *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier 
+
+
+SQL> select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno);
+select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno)
+       *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier 
+
+
+SQL> select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno)
+  2  ;
+select dno,max(avg_sal) from (select avg(sal) avg_sal from dept d join emp e on d.dno = e.deptno group by dno)
+       *
+ERROR at line 1:
+ORA-00904: "DNO": invalid identifier 
+
+
+SQL> select max(avg_sal) from (select avg(sal) avg_sal from dept d,emp e where d.dno = e.deptno group by dno);
+
+MAX(AVG_SAL)                                                                    
+------------                                                                    
+       40500                                                                    
+
+SQL> select deptno,avg(sal) avg_sal from dept d ,emp e where d.dno = e.deptno group by dno
+  2  ;
+
+DEP    AVG_SAL                                                                  
+--- ----------                                                                  
+D1       37200                                                                  
+D6       26000                                                                  
+D4       40500                                                                  
+D3       35000                                                                  
+D2       40000                                                                  
+D5       28000                                                                  
+
+6 rows selected.
+
+SQL> spool off;

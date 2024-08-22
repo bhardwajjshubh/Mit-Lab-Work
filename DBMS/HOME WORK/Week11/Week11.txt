@@ -1,0 +1,229 @@
+11.1 Write a procedure to calculate simple interest, taking principle, rate and year as 
+inputs.
+
+ create or replace procedure simple_inst
+    (principle in number, rate in number, time in number) is
+  
+    si number;
+    begin
+       si := (principle * time * rate)/100;
+       dbms_output.put_line('Principle amount = ' || principle);
+       dbms_output.put_line('Rate of interest = ' || rate);
+       dbms_output.put_line('Duration = ' || time);
+      dbms_output.put_line('Simple interest = ' || si);
+   end;
+   /
+
+Procedure created.
+
+SQL> execute simple_inst(1700,3,7);
+Principle amount = 1700
+Rate of interest = 3
+Duration = 7
+Simple interest = 357
+
+PL/SQL procedure successfully completed.
+
+
+
+
+********************************************************************************************************************
+11.2 Write a procedure to take department name as input to display project being handled 
+by the department and name of the employees working under those projects belonging 
+to the department.
+
+ create or replace procedure proc_dept
+    (dept_name in dept.dname%type) is
+  
+    cursor proj_handled(d_no dept.dname%type) is select * from emp where deptno = d_no;
+    d_no dept.dno%type;
+    p_name proj.prj_name%type;
+    begin
+       dbms_output.put_line('ename' || '---' || 'dept_name' || '---' || 'p_name');
+       select dno into d_no from dept where dname = dept_name;
+      for i in proj_handled(d_no)
+      loop
+              select prj_name into p_name from proj where dno = d_no;
+              dbms_output.put_line(i.ename || '---' || dept_name || '---' || p_name);
+      end loop;
+   end;
+   /
+
+Procedure created.
+
+SQL> execute proc_dept('HR');
+ename---dept_name---p_name
+Manu---HR---Stocks
+
+PL/SQL procedure successfully completed.
+
+
+
+
+
+
+
+********************************************************************************************************************
+11.3 Write two functions to calculate age and service experience of all employees and 
+return these values to calling PL/SQL block and display. 
+
+
+ func1:
+
+ CREATE OR REPLACE FUNCTION Cal_Age(date_of_birth IN DATE) RETURN NUMBER IS
+        v_age NUMBER;
+    BEGIN
+        v_age := FLOOR(MONTHS_BETWEEN(SYSDATE, date_of_birth) / 12);
+        RETURN v_age;
+    END Cal_age;
+    /
+
+Function created.
+
+
+ func2:
+
+ CREATE OR REPLACE FUNCTION Cal_Exp(join_date IN DATE) RETURN NUMBER IS
+        v_exp NUMBER;
+    BEGIN
+        v_exp := FLOOR(MONTHS_BETWEEN(SYSDATE, join_date) / 12);
+        RETURN v_exp;
+    END Cal_Exp;
+    /
+
+Function created.
+
+ DECLARE
+       e_no emp.empno%type;
+       name emp.ename%type;
+       dob emp.date_birth%type;
+       join_d emp.date_join%type;
+        v_age number(10,2);
+       v_exp number(10,2);
+  
+    begin
+      e_no := &Employee_Number;
+      select ename,date_birth,date_join into name,dob,join_d from emp where empno = e_no;
+      v_age := Cal_Age(dob);
+      v_exp := Cal_Exp(join_d);
+      dbms_output.put_line('Ename' || '---' || 'AGE' || '---' || 'Service');
+      dbms_output.put_line( name || '---' || v_age || '---' || v_exp);
+   END;
+   /
+Enter value for employee_number: 101
+old  10:        e_no := &Employee_Number;
+new  10:        e_no := 101;
+Ename---AGE---Service
+Ravi---38---22
+
+PL/SQL procedure successfully completed.
+
+
+
+
+
+
+********************************************************************************************************************
+11.4 Write a function to find total project fund on different projects that every department has 
+received. In main program call function for every deptno fetched from Dept. Display following 
+message format for every deptno in main program- (use cursor)
+Marketing department has received Rs. 1600000/-
+
+
+
+ CREATE OR REPLACE FUNCTION calculate_total_project_fund(dept_number in varchar2) RETURN NUMBER IS
+      total_fund NUMBER := 0;
+    BEGIN
+      SELECT SUM(proj_fund)
+      INTO total_fund
+      FROM proj
+      WHERE dno = dept_number;
+  
+      RETURN total_fund;
+   END calculate_total_project_fund;
+   /
+
+Function created.
+
+ SET SERVEROUTPUT ON;
+ DECLARE
+      v_deptno proj.dno%TYPE;
+      v_total_fund NUMBER;
+    v_dname dept.dname%TYPE;
+  
+      CURSOR dept_cursor IS
+        SELECT DISTINCT p.dno, d.dname FROM proj p join dept d on d.dno=p.dno;
+    BEGIN
+      OPEN dept_cursor;
+     LOOP
+       FETCH dept_cursor INTO v_deptno, v_dname;
+       EXIT WHEN dept_cursor%NOTFOUND;
+       v_total_fund := calculate_total_project_fund(v_deptno);
+       DBMS_OUTPUT.PUT_LINE(v_dname || '  department has received Rs. ' || v_total_fund || '/-');
+     END LOOP;
+     CLOSE dept_cursor;
+   END;
+   /
+Quality  department has received Rs. 200000/-
+Marketing  department has received Rs. 1200000/-
+IT  department has received Rs. 300000/-
+HR  department has received Rs. 700000/-
+Research  department has received Rs. 900000/-
+
+PL/SQL procedure successfully completed.
+
+
+********************************************************************************************************************
+11.5 Write a package containing procedure to find sum of salary of employees working in a 
+ given Department Name and a function to find number of employees working under a 
+ given Project Name.
+
+
+create or replace package emp_sum_salary as procedure sum_sal(v_dname in varchar2);
+function number_of_employee(v_prj_name in varchar2) return number;
+end emp_sum_salary;
+/
+
+CREATE OR REPLACE PACKAGE BODY emp_sum_salary AS 
+  PROCEDURE sum_sal(v_dname IN VARCHAR2) IS
+    v_deptno VARCHAR2(3);
+    v_sum_emp NUMBER(30, 3);
+  BEGIN
+    SELECT dno INTO v_deptno FROM dept WHERE dname = v_dname;
+    SELECT SUM(sal) INTO v_sum_emp FROM emp WHERE deptno = v_deptno;
+    DBMS_OUTPUT.PUT_LINE('Sum of salary of all employees in department ' || v_dname || ' is: ' || v_sum_emp);
+  END sum_sal;
+  
+   Function number_of_employee(v_prj_name IN VARCHAR2) RETURN NUMBER IS
+    v_emp_num NUMBER(5);
+    v_prj_no VARCHAR2(10);
+  BEGIN 
+    SELECT prj_no INTO v_prj_no FROM proj WHERE prj_name = v_prj_name;
+    SELECT distinct(COUNT(empno)) INTO v_emp_num FROM emp WHERE proj_id = v_prj_no;
+    RETURN v_emp_num;
+  END number_of_employee;
+END emp_sum_salary;
+/
+
+set serveroutput on
+DECLARE
+  v_num NUMBER;
+  prjname varchar2(20):='&project_name';
+  n int:=emp_sum_salary.number_of_employee(prjname);
+BEGIN
+ emp_sum_salary.sum_sal('&Department_name');	
+ 
+ DBMS_OUTPUT.PUT_LINE('No of employees working under '||prjname|| ' is '||n);
+END;
+/
+
+Enter value for project_name: Booking
+old   3:   prjname varchar2(20):='&project_name';
+new   3:   prjname varchar2(20):='Booking';
+Enter value for department_name: Marketing
+old   6:  emp_sum_salary.sum_sal('&Department_name');
+new   6:  emp_sum_salary.sum_sal('Marketing');
+Sum of salary of all employees in department Marketing is: 230000
+No of employees working under Booking is 6
+
+PL/SQL procedure successfully completed.

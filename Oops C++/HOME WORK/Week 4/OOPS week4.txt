@@ -1,0 +1,384 @@
+flight.cpp
+//Create a flight class that has private data members: flight number (integer),
+//destination (characters), distance (float), fuel (float).
+//a) Provide a default constructor that initializes distance to 500 kms always
+//b) Private Member functions: calculate_fuel()to calculate the value of Fuel as per
+//the following criteria:
+//Distance (in kilometers) Fuel (in liters)
+//<=1000 500
+//>1000 and <=2000 1100
+//>2000 2200
+//c) Public Member functions: information_entry() to allow user to enter values for
+//flight number, destination, distance which calls function calculate_fuel() to
+//calculate the quantity of fuel and display_info() to allow viewing flight details.
+//Name:Shubham Kumar
+//Reg No:035
+//Date:04/09/2023
+
+
+#include<iostream>
+using namespace std;
+class flight
+{
+        int flight_no;
+        char dest[20];
+        float dist,fuel;
+        private: void calculate_fuel()
+        {
+                if(dist<=1000)
+                        fuel=500;
+                else if(dist>1000&dist<=2000)
+                        fuel=1100;
+                else
+                        fuel=2200;
+        }
+        public:
+        flight()
+        {
+                dist=500;
+        }
+        void information_entry();
+        void display_info();
+};
+void flight::information_entry()
+{
+        cout<<"Flight Number: "<<endl;
+        cin>>flight_no;
+        cout<<"Destination: "<<endl;
+        cin>>dest;
+        cout<<"Distance: "<<endl;
+        cin>>dist;
+        calculate_fuel();
+}
+void flight::display_info()
+{
+        cout<<"Flight Number: "<<flight_no<<endl;
+        cout<<"Distance: "<<dist<<endl;
+        cout<<"Destination: "<<dest<<endl;
+        cout<<"Fuel required for: "<<dist<<"km is: "<<fuel<<endl;
+}
+int main()
+{
+        flight f1;
+        f1.information_entry();
+        f1.display_info();
+        return 0;
+}
+
+
+
+
+
+//2.Define a class to represent the bank account of a customer where the data members
+//are Customer name, Account number, Account type [Savings(S), Fixed(F) or
+//Current(C)] and balance amount.
+//Member functions:
+//i. To assign initial opening balance to Rs. 500 using constructor
+//ii. To deposit an amount into the account
+//iii. To withdraw an amount after checking the balance. (Use friend function)
+//iv. To display the account details.
+//Write the main function to test the above program with two objects.
+//Name:Shubham Kumar
+//Reg No:035
+//Date:04/09/23
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+class bank_acc
+{
+        char cust_name[25],acc_type[20];
+        float balance;
+        int acc_no;
+        public:
+        bank_acc()
+        {
+                balance = 500;
+        }
+        void get_data()
+        {
+                cout<<"Enter name: ";
+                cin>>cust_name;
+                cout<<"Enter account type [savings(s), fixed(f), current(c)]: ";
+                cin>>acc_type;
+                cout<<"Enter account number: ";
+                cin>>acc_no;
+                cout<<"---------------------------------------------------------"<<endl;
+        }
+        void deposit()
+        {
+                int amount;
+                cout<<"Enter amount to deposit : ";
+                cin>>amount;
+                if(amount<=0)
+                {
+                        cout<<"Amount should be greater than 0"<<endl;
+                }
+                else
+                {
+                        balance +=amount;
+                        cout<<"\n\tAmount deposited"<<endl;
+                }
+        }
+        void withdraw()
+        {
+                int amount;
+                cout<<"Enter the amount to be withdrawn: ";
+                cin>>amount;
+                if(amount>balance)
+                {
+                        cout<<"Balance= "<<balance<<endl;
+                        cout<<"Insufficient balance"<<endl;
+                }
+                else
+                {
+                        cout<<"\n\tAmount withdrawn"<<endl;
+                        cout<<"Balance = "<<balance;
+                        balance-=amount;
+                }
+        }
+        void display()
+        {
+                cout<<"Customer Name: "<<cust_name<<endl;
+                cout<<"Account Number: "<<acc_no<<endl;
+                cout<<"Account Type: "<<acc_type<<endl;
+                cout<<"Balance: "<<balance<<endl;
+                cout<<"----------------------------------------------------------"<<endl;
+        }
+};
+int main()
+{
+        bank_acc obj1,obj2;
+        cout<<"For object 1:"<<endl;
+        obj1.get_data();
+        obj1.deposit();
+        obj1.withdraw();
+        obj1.display();
+        cout<<"----------------------------------------------------------"<<endl;
+        cout<<"For object 2:"<<endl;
+        obj2.get_data();
+        obj2.deposit();
+        obj2.withdraw();
+        obj2.display();
+        return 0;
+}
+
+
+
+
+
+
+
+
+
+
+//3. Write necessary class and member function definitions for a cricket player object.
+//The program should accept the details from user (maximum 10 objects). The details
+//of the player are player code, name, number of matches played, total runs scored in
+//all matches and number of times not out.
+//Name:Shubham Kumar
+//Reg No:035
+//Date:04/09/2023
+
+#include<iostream>
+using namespace std;
+class cricketPlayer
+{
+        char player_code[6];
+        int no_of_matches,not_outs;
+        public:
+        int total_runs;
+        char name[25];
+        cricketPlayer()
+        {
+                no_of_matches = 0;
+                not_outs = 0;
+                total_runs= 0;
+        }
+        void getData()
+        {
+                cout<<"Enter Player Details."<<endl;
+                cout<<"___________________________________"<<endl;
+                cout<<"Code: "<<endl;
+                cin>>player_code;
+                cout<<"Name: "<<endl;
+                cin>>name;
+                cout<<"Number of matches played: "<<endl;
+                cin>>no_of_matches;
+                cout<<"Total runs scored: "<<endl;
+                cin>>total_runs;
+                cout<<"Number of times not out: "<<endl;
+                cin>>not_outs;
+                if(no_of_matches<not_outs)
+                {
+                        cout<<"Number of matches should be more then not outs"<<endl;
+                        exit(0);
+                }
+        }
+
+
+        void display()
+        {
+                cout<<player_code<<"\t"<<name<<"\t"<<no_of_matches<<"\t\t"<<total_runs<<"\t\t"<<not_outs<<endl;
+        }
+        float avgRuns()
+        {
+                return total_runs/float(no_of_matches-not_outs);
+        }
+};
+int main()
+{
+        //cricketPlayer obj[10];
+        int n,choice,p_no;
+        float total_avg=0,a=0;
+        cout<<"Enter number of players : "<<endl;
+        cin>>n;
+        if(n<=10)
+        {
+                cricketPlayer obj[n],temp;
+                do
+                {
+                        cout<<"MENU"<<endl;
+                        cout<<"____________________________________________________________"<<endl;
+                        cout<<"1.Enter player details."<<endl;
+                        cout<<"2.Display average runs of a single player."<<endl;
+                        cout<<"3.Display average runs all players."<<endl;
+                        cout<<"4.Display list of players in sorted order as per total runs."<<endl;
+                        cout<<"\nEnter your choice: ";
+                        cin>>choice;
+                        cout<<"____________________________________________________________"<<endl;
+                        switch(choice)
+                        {
+                                case 1:
+                                        //cout<<"\n\tenter number of players : ";
+                                        //cin>>n;
+                                        for(int i=0;i<n;i++)
+                                        {
+                                                cout<<"Player "<<i+1<<endl;
+                                                obj[i].getData();
+                                        }
+
+                                                    break;
+
+                                case 2:
+                                        cout<<"\n\nEnter a player number to get his average runs: ";
+                                        cin>>p_no;
+                                        obj[p_no-1].display();
+                                        cout<<"-------------------------------"<<endl;
+                                        cout<<"\tAverage runs of "<<obj[p_no-1].name<<" is : "<<obj[p_no-1].avgRuns()<<endl;
+                                        break;
+                                case 3:
+                                        cout<<"\n\n\tAverage runs of all players: ";
+                                        //cout<<"Player\tName\tAverage Runs"<<endl;
+                                        for(int i=0;i<n;i++)
+                                        {
+                                                //cout<<i+1<<"\t"<<obj[i].name<<"\t"<<obj[i].avgRuns()<<endl;
+                                                total_avg=total_avg + obj[i].avgRuns();
+                                        }
+                                        a=total_avg/n;
+                                        cout<<a<<"\n";
+                                        //cout<<"Average runs of all players : "<<avgRuns(total_avg,n)<<"\n";
+                                        break;
+                                case 4:
+                                        cout<<"List of players in sorted order as per total runs : "<<endl;
+                                        //cricketPlayer temp;
+                                        for(int i=0;i<n;i++)
+                                        {
+                                                for(int j=1;j<n;j++)
+                                                {
+                                                        if(obj[i].total_runs<obj[j].total_runs)
+                                                        {
+                                                                temp = obj[i];
+                                                                obj[i] = obj[j];
+                                                                obj[j] = temp;
+                                                        }
+                                                }
+                                        }
+                                        cout<<"____________________________________________________________"<<endl;
+                                        cout<<"\t\tPlayer Details"<<endl;
+                                        cout<<"____________________________________________________________"<<endl;
+                                        cout<<"Code\tName\tMatches Played\tTotal Runs\tNot Outs"<<endl;
+                                        for(int i=0;i<n;i++)
+                                        {
+                                                obj[i].display();
+                                                cout<<endl;
+                                        }
+                                        break;
+                                default:
+                                        cout<<"invalid choice."<<endl;
+                                        exit(0);
+                        }
+                }while(choice !=0);
+        }
+        else
+        {
+                cout<<"No of players should be less than 10"<<endl;
+                exit(0);
+        }
+        return 0;
+}
+
+
+
+
+//4. Write a C++ program to create a class called Complex and implement the following
+//by overloading functions that return the complex number.
+//i. add (s1,s2) where s1 is an integer and s2 is a complex number
+//ii. add (s1,s2) where s1 & s2 are both complex numbers.
+//Name:Shubham Kumar
+//Reg No:035
+//Date:4/9/2023
+#include<iostream>
+using namespace std;
+class complex
+{
+        int real,img;
+        public:void getdata(){
+                       cout<<"\nEnter real and imaginary part of a number: ";
+                       cin>>real>>img;
+               }
+               void display(){
+                       cout<<"\nResult is: "<<real<<"+"<<img<<"i"<<endl;
+               }
+               complex add(complex c1,complex c2){
+                       complex temp;
+                       temp.real=c1.real+c2.real;
+                       temp.img=c1.img+c2.img;
+                       return temp;
+               }
+               complex add(int num,complex c2){
+                       complex temp;
+                       temp.real=num+c2.real;
+                       temp.img=c2.img;
+                       return temp;
+               }
+};
+int main()
+{
+        system("clear");
+        complex c1,c2,c3,c4;
+        int choice,num;
+        while(true)
+                        {
+                                cout<<"\n1.Add an integer and a complex number\n2.Add 2 complex numbers\nEnter your choice:";
+                                cin>>choice;
+                                switch(choice){
+                                        case 1:cout<<"\nEnter integer number: ";
+                                               cin>>num;
+                                               c1.getdata();
+                                               c4=c3.add(num,c1);
+                                               c4.display();
+                                               break;
+                                        case 2:cout<<"\nEnter 1st complex number: ";
+                                               c1.getdata();
+                                               cout<<"\nEnter 2nd complex number: ";
+                                               c2.getdata();
+                                               c4=c3.add(c1,c2);
+                                               c4.display();
+                                               break;
+                                        default:cout<<"\nInvalid choice\n";
+                                                exit(0);
+                                }                                                                                                                      }
+
+        return 0;
+}

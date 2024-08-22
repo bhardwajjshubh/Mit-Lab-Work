@@ -1,0 +1,348 @@
+3.2 DEPT table data.
+
+SQL> insert into dept values('D1','Marketing','CHN',500000);
+
+1 row created.
+
+SQL> insert into dept values('D2','Research','MNG',300000);
+
+1 row created.
+
+SQL> insert into dept values('D3','IT','BNG',400000);
+
+1 row created.
+
+SQL> insert into dept values('D4','HR','BGG',200000);
+insert into dept values('D4','HR','BGG',200000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA067.VALID_LOC_CONS) violated 
+
+
+SQL> insert into dept values('D4','HR','BNG',200000);
+
+1 row created.
+
+SQL> insert into dept values('D5','Accounts','BNG',500000);
+
+1 row created.
+
+SQL> insert into dept values(Null,'Corporate','HYD',700000);
+
+1 row created.
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  Marketing  CHN            500000                                            
+D2  Research   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D4  HR         BNG            200000                                            
+D5  Accounts   BNG            500000                                            
+    Corporate  HYD            700000                                            
+
+6 rows selected.
+
+***********************************************************************************************************************
+
+3.3 PROJ table data. 
+
+SQL> insert into proj values('D1','p1','Booking',4,to_date('05-02-2022','dd-mm-yyyy'),to_date('03-08-2022','dd-mm-yyyy'),400000);
+
+1 row created.
+
+SQL> insert into proj values('D2','p1','Auomobile',2,to_date('14-03-2010','dd-mm-yyyy'),to_date('23-06-2012','dd-mm-yyyy'),200000);
+
+1 row created.
+
+SQL> insert into proj values('D3','p2','Ecommerce',3,to_date('16-07-2015','dd-mm-yyyy'),to_date('18-04-2016','dd-mm-yyyy'),300000);
+
+1 row created.
+
+SQL> insert into proj values('D1','p3','Stocks',5,to_date('28-09-2017','dd-mm-yyyy'),to_date('05-10-2020','dd-mm-yyyy'),500000);
+
+1 row created.
+
+SQL> insert into proj values('D4','p2','Stocks',7,to_date('25-10-2016','dd-mm-yyyy'),to_date('07-11-2019','dd-mm-yyyy'),700000);
+
+1 row created.
+
+SQL> select*from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE   PROJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  p1    Booking             4 05-FEB-22 03-AUG-22     400000                  
+D2  p1    Auomobile           2 14-MAR-10 23-JUN-12     200000                  
+D3  p2    Ecommerce           3 16-JUL-15 18-APR-16     300000                  
+D1  p3    Stocks              5 28-SEP-17 05-OCT-20     500000                  
+D4  p2    Stocks              7 25-OCT-16 07-NOV-19     700000                  
+             
+***********************************************************************************************************************
+
+
+3.1 EMP table data.
+
+
+SQL> insert into emp values(100,'Ravi','MGR',null,to_date('10-10-1985','dd-mm-yyyy'),32000,10000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p1');
+insert into emp values(100,'Ravi','MGR',null,to_date('10-10-1985','dd-mm-yyyy'),32000,10000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA067.VALID_EMPNO_CONS2) violated 
+
+
+SQL> insert into emp values(101,'Ravi','MGR',null,to_date('10-10-1985','dd-mm-yyyy'),32000,10000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p1');
+
+1 row created.
+
+SQL> insert into emp values(102,'RaviRaj','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),24000,11000,'D1',to_date('12-11-2000','dd-mm-yyyy'),'p3');
+
+1 row created.
+
+SQL> insert into emp values(111,'Raghu','GM',null,to_date('10-12-1974','dd-mm-yyyy'),45000,15000,null,to_date('03-12-1985','dd-mm-yyyy'),null);
+
+1 row created.
+
+SQL> insert into emp values(150,'Ram','CEO',null,to_date('10-12-1970','dd-mm-yyyy'),60000,30000,null,to_date('03-12-1990','dd-mm-yyyy'),null);
+
+1 row created.
+
+SQL> insert into emp values(103,'Anmol','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),32000,10000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p1');
+
+1 row created.
+
+SQL> insert into emp values(103,'Shreya','CLRK',null,to_date('02-10-1980','dd-mm-yyyy'),45000,15000,'D1',to_date('02-10-2002','dd-mm-yyyy'),'p3');
+insert into emp values(103,'Shreya','CLRK',null,to_date('02-10-1980','dd-mm-yyyy'),45000,15000,'D1',to_date('02-10-2002','dd-mm-yyyy'),'p3')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA067.SYS_C0064794) violated 
+
+
+SQL> insert into emp values(109,'Shreya','CLRK',null,to_date('02-10-1980','dd-mm-yyyy'),45000,15000,'D1',to_date('02-10-2002','dd-mm-yyyy'),'p3');
+
+1 row created.
+
+SQL> insert into emp values(125,'Manu','A.MGR',null,to_date('10-12-1980','dd-mm-yyyy'),24000,11000,'D4',to_date('02-10-2002','dd-mm-yyyy'),'p2');
+
+1 row created.
+
+SQL> insert into emp values(104,'Reshma','CLERK',null,to_date('02-10-1980','dd-mm-yyyy'),50000,17000,'D2',to_date('02-10-2005','dd-mm-yyyy'),'p1');
+insert into emp values(104,'Reshma','CLERK',null,to_date('02-10-1980','dd-mm-yyyy'),50000,17000,'D2',to_date('02-10-2005','dd-mm-yyyy'),'p1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA067.JOB_CHK_CONS) violated 
+
+
+SQL> insert into emp values(104,'Reshma','CLRK',null,to_date('02-10-1980','dd-mm-yyyy'),50000,17000,'D2',to_date('02-10-2005','dd-mm-yyyy'),'p1');
+
+1 row created.
+
+SQL> insert into emp values(106,'Aman','MGR',null,to_date('02-10-1986','dd-mm-yyyy'),47000,15000,'D2',to_date('02-10-1985','dd-mm-yyyy'),'p1');
+insert into emp values(106,'Aman','MGR',null,to_date('02-10-1986','dd-mm-yyyy'),47000,15000,'D2',to_date('02-10-1985','dd-mm-yyyy'),'p1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA067.DB_LESS_DBJOIN_CONS) violated 
+
+
+SQL> insert into emp values(106,'Aman','MGR',null,to_date('02-10-1986','dd-mm-yyyy'),47000,15000,'D2',to_date('02-10-2002','dd-mm-yyyy'),'p1');
+
+1 row created.
+
+SQL> insert into emp values(123,'Mahesh','CLRK',null,to_date('10-12-1974','dd-mm-yyyy'),25000,10000,'D3',to_date('02-10-2002','dd-mm-yyyy'),'p2');
+
+1 row created.
+
+SQL> insert into emp values(108,'Saritha','CLRK',null,to_date('10-12-1970','dd-mm-yyyy'),27000,10000,'D9',to_date('02-10-1985','dd-mm-yyyy'),'p1');
+insert into emp values(108,'Saritha','CLRK',null,to_date('10-12-1970','dd-mm-yyyy'),27000,10000,'D9',to_date('02-10-1985','dd-mm-yyyy'),'p1')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA067.DEPT_FK_DEPT_CONS) violated - parent 
+key not found 
+
+
+SQL> insert into emp values(108,'Saritha','CLRK',null,to_date('10-12-1970','dd-mm-yyyy'),27000,10000,'D1',to_date('02-10-1985','dd-mm-yyyy'),'p1');
+
+1 row created.
+
+SQL> insert into emp values(103,'Varshi','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),50000,17000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p3');
+insert into emp values(103,'Varshi','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),50000,17000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p3')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA067.SYS_C0064794) violated 
+
+
+SQL> insert into emp values(110,'Varshi','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),50000,17000,'D1',to_date('02-10-2001','dd-mm-yyyy'),'p3');
+
+1 row created.
+
+SQL> insert into emp values(112,'Abay','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),21000,9000,'D5',to_date('10-12-1980','dd-mm-yyyy'),'p3');
+insert into emp values(112,'Abay','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),21000,9000,'D5',to_date('10-12-1980','dd-mm-yyyy'),'p3')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA067.DB_LESS_DBJOIN_CONS) violated 
+
+
+SQL> insert into emp values(112,'Abay','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),21000,9000,'D5',to_date('10-12-2003','dd-mm-yyyy'),'p3');
+insert into emp values(112,'Abay','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),21000,9000,'D5',to_date('10-12-2003','dd-mm-yyyy'),'p3')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA067.SYS_C0064807) violated - parent key not 
+found 
+
+
+SQL> insert into emp values(112,'Abay','CLRK',null,to_date('10-12-1980','dd-mm-yyyy'),21000,9000,'D1',to_date('10-12-2003','dd-mm-yyyy'),'p3');
+
+1 row created.
+
+
+
+SQL> update emp set mgrid=111 where empno=101;
+
+1 row updated.
+
+SQL> update emp set mgrid=106 where empno=102;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=111;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=103;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=109;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=125;
+
+1 row updated.
+
+SQL> update emp set mgrid=125 where empno=104;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=106;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=123;
+
+1 row updated.
+
+SQL> update emp set mgrid=106 where empno=108;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=103;
+
+1 row updated.
+
+SQL> update emp set mgrid=106 where empno=112;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=110;
+
+1 row updated.
+
+SQL> select*from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PROJ_ID
+---------- ---------- --------- ---------- --------- ---------- ---------- --- --------- ----------
+       101 Ravi       MGR              111 10-OCT-85      32000      10000 D1  02-OCT-01 p1
+       102 RaviRaj    CLRK             106 10-DEC-80      24000      11000 D1  12-NOV-00 p3
+       111 Raghu      GM               150 10-DEC-74      45000      15000     03-DEC-85
+       150 Ram        CEO                  10-DEC-70      60000      30000     03-DEC-90
+       103 Anmol      CLRK             111 10-DEC-80      32000      10000 D1  02-OCT-01 p1
+       109 Shreya     CLRK             111 02-OCT-80      45000      15000 D1  02-OCT-02 p3
+       125 Manu       A.MGR            150 10-DEC-80      24000      11000 D4  02-OCT-02 p2
+       104 Reshma     CLRK             125 02-OCT-80      50000      17000 D2  02-OCT-05 p1
+       106 Aman       MGR              111 02-OCT-86      47000      10000 D2  02-OCT-02 p1
+       123 Mahesh     MGR              111 10-DEC-74      35000      10000 D3  02-OCT-02 p2
+       108 Saritha    CLRK             106 10-DEC-70      27000      10000 D1  02-OCT-85 p1
+       110 Varshi     CLRK             111 10-DEC-80      50000      17000 D1  02-OCT-01 p3
+       112 Abay       CLRK             106 10-DEC-80      21000       9000 D1  10-DEC-03 p3
+       129 Jake       A.MGR                11-AUG-92      22000      19000 D7  22-AUG-10 p2
+       128 Vamshi     A.MGR                12-SEP-90      23000      12000 D7  21-AUG-09 p2
+       132 Arjun      CLRK                 12-SEP-93      21000            D2  11-SEP-10 p1
+       131 Kavraj     A.MGR                12-SEP-92      23000            D3  21-JUL-08 p2
+
+17 rows selected.
+***********************************************************************************************************************
+3.4 Run COMMIT command. Delete the employee records working on project P3 and confirm the result. Type ROLLBACK to restore the records back if records are deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from emp where proj_id='p3';
+
+4 rows deleted.
+
+SQL> rollback;
+
+Rollback complete.
+***********************************************************************************************************************
+3.5 Run COMMIT command. Delete Accounts department from the DEPT table and confirm the result with reason. Type ROLLBACK to restore the records back if records 
+are deleted
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from dept where dname='Accounts';
+
+1 row deleted.
+
+SQL> rollback;
+
+Rollback complete.
+***********************************************************************************************************************
+3.6 Run COMMIT command. Delete records of employees with Empno 125 and working in project P2. Type ROLLBACK to restore the records back, if records are deleted.
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from emp where empno=125 and proj_id='p2';
+delete from emp where empno=125 and proj_id='p2'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCA067.MGR_FK_EMPNO_CONS) violated - child
+record found
+
+
+SQL> rollback;
+
+Rollback complete.
+
+***********************************************************************************************************************
+3.7 Update the DNO of first record in PROJ to D5. 
+
+SQL> update proj set dno='D5' where dno='D1' and prj_no='p1';
+update proj set dno='D5' where dno='D1' and prj_no='p1'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCA067.SYS_C0064807) violated - child record 
+found 
+
+***********************************************************************************************************************
+3.8 Update the Job of employee with Empno 123 to MGR, salary to 35000 and his manager as 111.
+
+SQL> update emp set job='MGR',sal=35000,MGRID=111 where empno=123;
+
+1 row updated.
+
+***********************************************************************************************************************
+3.9 Update the EMP table to set the default commission of all employees to Rs.10000/- who are working as managers
+
+SQL> update emp set comm=10000 where job='MGR';
+
+3 rows updated.
+
+
+

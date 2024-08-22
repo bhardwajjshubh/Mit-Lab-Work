@@ -1,0 +1,253 @@
+/* Program name - Q1. Write a C++ program to exchange two variables without using any temporary
+ * variable. .
+ * Name- Shubham kumar
+ * Reg no- 230970035
+ * Date - 21/08/2023  */
+#include<iostream>
+using namespace std;
+int main(){
+int num1,num2;
+cout<<"enter num1"<<endl;
+cin>>num1;
+cout<<"Enter num2"<<endl;
+cin>>num2;
+
+num1 = num1+num2;
+num2 = num1-num2;
+num1 = num1-num2;
+
+cout<<"result after swapping"<<endl;
+cout<<"num1 is "<<num1<<"      num2 is "<<num2;
+
+return 0;
+}
+
+
+
+/* Program name - Q2. Write a C++ program to find the largest of three numbers
+ * Name- Shubham kumar
+ * Reg no- 230970035
+ * Date - 21/08/2023  */
+
+#include<iostream>
+using namespace std;
+
+int main(){
+
+        int num1,num2,num3;
+        cout<<"Enter three no. " <<endl;
+
+        cin>>num1>>num2>>num3;
+
+        if(num1>=num2 && num1>=num3){
+                cout<<num1<<" is greater "<<endl;
+        }
+        else if(num2>=num1 && num2>=num3){
+                cout<<num2<<" is greater"<<endl;
+        }
+        else{
+                cout<<num3<<" is greater"<<endl;
+        }
+        return 0;
+
+}
+
+
+
+
+/* Program name - Q.3. Write a C++ program to calculate the area of a circle and a triangle.
+ * Name- Shubham kumar
+ * Reg no- 230970035
+ * Date - 21/08/2023  */
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+        float rad, base, height,area_tri,area_cir;
+
+        cout<<"Enter radius , base , height"<<endl;
+        cin>>rad>>base>>height;
+        area_cir = (22*rad*rad)/7;
+        area_tri = (base*height)/2;
+
+        cout<<"area of Circle = "<<area_cir<<endl;
+        cout<<"area of Triangle = "<<area_tri<<endl;
+        return 0;
+
+}
+
+
+
+
+Q4.  #include <iostream>
+
+using namespace std;
+int main()
+{
+    int hr, min, sec;
+    cout << "Enter the time in seconds" << endl;
+    cin >> sec;
+    hr = sec / 3600;
+    sec = sec % 3600;
+
+    min = sec / 60;
+    sec = sec % 60;
+
+    cout << hr << "hr:" << min << "min:" << sec << "sec";
+    return 0;
+}
+
+
+
+
+Q5.   /* Write a C++ program to convert the distance in mm to cm, inch, feet (1 cm = 10mm, 1 inch = 2.5cm, 1 feet = 12 inches). */
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    float mm, cm, inch, feet;
+    cout << "enter value in mm to convert in other format " << endl;
+    cin >> mm;
+    // mm to cm
+    cm = mm / 10;
+
+    // mm to inch
+    inch = mm / 25.4;
+
+    // mm to feet
+    feet = mm / 304.8;
+    cout << mm << " mm = " << cm << " cm " << endl;
+    cout << mm << " mm = " << inch << " inch " << endl;
+    cout << mm << " mm = " << feet << " feet " << endl;
+}
+
+
+
+Q6.   // 6. Write a C++ program to convert the temperature given in Fahrenheit to Celsius and vice versa. ( C = 5/9(F-32) )
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    double cel, f;
+
+    cout << " enter the temperature " << endl;
+    cin >> f;
+    cel = (f - 32.0) * 5.0 / 9.0;
+    cout << cel;
+    return 0;
+}
+
+
+Q7.    // . Write a C++ program to calculate the compound interest.  A = P (1 + r/n )nt
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    float ci, p, r, t, n;
+    cout << "enter p,r,t,n " << endl;
+
+    cin >> p >> r >> t >> n;
+
+    ci = p * (pow(1 + r / n, n * t));
+    cout << "The compound intrest is " << ci << endl;
+}
+
+
+
+Q8.    
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    string name;
+    int reg_no, join_year, marks[4], sum;
+    float avg;
+    char grade;
+
+    cout << "Enter name " << endl;
+    getline(cin, name);
+
+    cout << "Enter Registration no " << endl;
+    cin >> reg_no;
+
+    cout << "Enter year of joining " << endl;
+    cin >> join_year;
+
+    cout << "Enter Marks of students" << endl;
+    cin >> marks[0];
+    cin >> marks[1];
+    cin >> marks[2];
+    cin >> marks[3];
+    cin >> marks[4];
+
+    avg = (marks[0] + marks[1] + marks[2] + marks[3] + marks[4]) / 5;
+
+    sum = marks[0] + marks[1] + marks[2] + marks[3] + marks[4];
+
+    if (avg >= 90)
+    {
+        grade = 'A';
+    }
+
+    else if (80 <= avg >= 89)
+    {
+        grade = 'B';
+    }
+
+    else if (61 <= avg >= 79)
+    {
+        grade = 'C';
+    }
+
+    else if (51 <= avg >= 59)
+    {
+        grade = 'D';
+    }
+
+    else if (41 <= avg >= 49)
+    {
+        grade = 'E';
+    }
+    else
+    {
+        grade = 'F';
+    }
+    cout << "---------------------------------------------------------------------------------------------------------" << endl;
+    cout << "                       Score Card for Student: " << name << endl
+         << endl
+         << endl;
+
+    cout << "Registration no: " << reg_no << "                   Semester:1         Year: " << join_year << endl;
+
+    cout << "Grade Assigned" << endl;
+
+    cout << "Serial no.                  subject Name            marks Scored(out of 100)" << endl;
+    cout << "__________________________________________________________________________________________________________" << endl;
+    cout << "1                 Object Oriented Programming               " << marks[0] << endl;
+
+    cout << "2                 DBMS                                      " << marks[1] << endl;
+
+    cout << "3                 Reasearch Methodology                     " << marks[2] << endl;
+
+    cout << "4                 Computational Mathematics                 " << marks[3] << endl;
+
+    cout << "5                 Web Technologies                          " << marks[4] << endl
+         << endl;
+
+    cout << "                                        Total:              " << sum << endl;
+
+    cout << "                                        Average:            " << avg << endl;
+
+    cout << "                                        Grade:              " << grade << endl;
+    return 0;
+}

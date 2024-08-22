@@ -1,0 +1,14 @@
+Table Answer:
+
+       Compile     Run      "Print out a line"      "Print out multiples lines"
+1      No         No            No                       No
+
+2      No         No           No                      No
+
+3      yes        Yes          yes                    No
+
+4      NO         No            NO                       No
+
+5      No         No      	No 			No
+
+6      No	  No 		No 			No

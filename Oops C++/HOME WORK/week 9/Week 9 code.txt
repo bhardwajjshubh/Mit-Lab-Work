@@ -1,0 +1,234 @@
+Shubham Kumar Code
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class Employee
+{
+protected:
+    int eId;
+    char eName[20];
+
+public:
+    virtual void setData()
+    {
+        cout << "Enter Employee Id: ";
+        cin >> eId;
+        cout << "Enter Employee Name: ";
+        cin >> eName;
+    }
+
+    virtual void getData()
+    {
+        cout << "Employee Id is " << eId << endl;
+        cout << "Employee Name is " << eName << endl;
+    }
+};
+
+class Education
+{
+protected:
+    char board[10];
+
+public:
+    virtual void setData()
+    {
+        cout << "Enter board of education ";
+        cin >> board;
+    }
+    virtual void getData()
+    {
+        cout << "Board of education is " << board << endl;
+    }
+};
+
+class Laborer : public Employee
+{
+protected:
+    float workHour;
+    float hourlyRate;
+
+public:
+    void setData()
+    {
+        Employee::setData();
+        cout << "Enter Work hour: ";
+        cin >> workHour;
+        cout << "Enter Hourly rate: ";
+        cin >> hourlyRate;
+    }
+    void getData()
+    {
+        Employee::getData();
+        cout << "Work Hour of Laborer is " << workHour << endl;
+        cout << "Total wages of laborer is " << workHour * hourlyRate << endl;
+    }
+};
+
+class Scientist : public Employee, public Education
+{
+protected:
+    char field[20];
+
+public:
+    void setData()
+    {
+        Employee::setData();
+        Education::setData();
+        cout << "Enter the Field of the Scientist: ";
+        cin >> field;
+    }
+    void getData()
+    {
+        Employee::getData();
+        Education::getData();
+        cout << "The Field of the Scientist: " << field << endl;
+    }
+};
+
+class Manager : public Employee, public Education
+{
+protected:
+    int mId;
+    char mPost[20];
+
+public:
+    void setData()
+    {
+        Employee::setData();
+        Education::setData();
+        cout << "Enter Manager Id: ";
+        cin >> mId;
+        cout << "Enter Manager Post: ";
+        cin >> mPost;
+    }
+    void getData()
+    {
+        Employee::getData();
+        Education::getData();
+        cout << "Manager Id is " << mId << endl;
+        cout << "Manager Post is " << mPost << endl;
+    }
+};
+
+int main()
+{
+    Employee *e1;
+    Education *ed1;
+    Laborer *l1;
+    Scientist *s1;
+    Manager *m1;
+    cout << "Choose Employee Type \n1.Laborer\n2.Scientist\n3.Manager " << endl;
+    int choice;
+    cout << "Enter Choice ";
+    cin >> choice;
+
+    switch (choice)
+    {
+    case 1:
+        cout << "This is the Data of Laborer " << endl;
+        l1 = new Laborer();
+        e1 = l1;
+        e1->setData();
+        e1->getData();
+        delete l1;
+        break;
+
+    case 2:
+        cout << "This is the Data of Scientist " << endl;
+        s1 = new Scientist();
+        e1 = s1;
+        ed1 = s1;
+        e1->setData();
+        e1->getData();
+        ed1->setData();
+        ed1->getData();
+        delete s1;
+        break;
+
+    case 3:
+        cout << "This is the Data of Manager " << endl;
+        m1 = new Manager();
+        e1 = m1;
+        ed1 = m1;
+        e1->setData();
+        e1->getData();
+        ed1->setData();
+        ed1->getData();
+        delete m1;
+        break;
+    default:
+        cout << "Kindly Enter Valid Input";
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+Q2.
+
+#include <iostream>
+using namespace std;
+class Shape
+{
+protected:
+    double data1, data2;
+
+public:
+    virtual void get_data()
+    {
+        cin >> data1 >> data2;
+    }
+    virtual void display_area() = 0;
+};
+
+class Triangle : public Shape
+{
+public:
+    void get_data()
+    {
+        cout << "Enter base and height:  ";
+        Shape::get_data();
+    }
+    void display_area()
+    {
+        cout << "Area of Triangle is: " << 0.5 * data1 * data2 << endl;
+    }
+};
+class Rectangle : public Shape
+{
+public:
+    void get_data()
+    {
+        cout << "Enter length and breadth:  ";
+        Shape::get_data();
+    }
+    void display_area()
+    {
+        cout << "Area of Reactangle is: " << data1 * data2 << endl;
+    }
+};
+int main()
+{
+    Shape *s1;
+    Rectangle r1;
+    Triangle t1;
+    s1 = &r1;
+    s1->get_data();
+    s1->display_area();
+
+    s1 = &t1;
+    s1->get_data();
+    s1->display_area();
+    return 0;
+}

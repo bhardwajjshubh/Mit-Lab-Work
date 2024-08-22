@@ -1,0 +1,143 @@
+6.1
+
+SQL> select job,sum(sal) from emp group by job;
+
+JOB         SUM(SAL)
+--------- ----------
+CEO            60000
+GM             45000
+A.MGR         115000
+CLRK          233000
+MGR           124000
+6.2
+ with temp(count,deptid) as (select count(empno),deptno from emp where proj_id='P1'
+    group by deptno)
+    select dname from dept where dno in(select deptid from temp where count in(select
+   max(count) from temp));
+
+DNAME
+----------
+Research
+Marketing
+6.3
+ select ename,job from emp,dept where emp.deptno=dept.dno and dname in('Marketing','Research');
+
+ENAME      JOB
+---------- ---------
+Ravi       MGR
+Raviraj    CLRK
+Ramesh     A.MGR
+Samesh     CLRK
+Mani       CLRK
+Manish     MGR
+Mahima     CLRK
+Mahi       CLRK
+Asha       CLRK
+
+9 rows selected.
+6.4
+ select ename,sal from emp where sal>(select min(sal) from emp);
+
+ENAME             SAL
+---------- ----------
+Ravi            32000
+Raviraj         24000
+Raghu           45000
+Raghav          60000
+Ramesh          60000
+Samesh          50000
+Manu            55000
+Mani            57000
+Manish          57000
+Mahesh          35000
+Mahesha         30000
+
+ENAME             SAL
+---------- ----------
+Mahima          30000
+
+12 rows selected.
+6.5
+select dname,count(empno) from emp,dept where emp.deptno=dept.dno group by dname having count(empno)>=3;
+
+DNAME      COUNT(EMPNO)
+---------- ------------
+Marketing             7
+6.6
+ 
+	
+	 select distinct deptno from emp where sal=(select  max(avg(sal)) from emp group by deptno);
+
+DEP
+---
+D2
+
+6.7
+select dname from dept,proj where dept.dno=proj.dno group by dname having count(prj_no)>1;
+
+DNAME
+----------
+Marketing
+6.8
+ select count(empno) from emp where extract(day from date_join)>15;
+
+COUNT(EMPNO)
+------------
+           2 
+6.9
+select empno,ename,job from emp where job=(select job from emp where ename='Mahesh');
+
+     EMPNO ENAME      JOB
+---------- ---------- ---------
+       101 Ravi       MGR
+       106 Manish     MGR
+       123 Mahesh     MGR
+6.10
+create view emp_prj_vw as select empno,ename,prj_name from emp,proj where emp.deptno=proj.dno and deptno=(select dno from dept where dname='Marketing');
+
+View created.
+
+SQL> select ename,prj_name from emp_prj_vw;
+
+ENAME      PRJ_NAME
+---------- ----------
+Ravi       robotics
+Raviraj    robotics
+Ramesh     robotics
+Samesh     robotics
+Mahima     robotics
+Mahi       robotics
+Asha       robotics
+Ravi       CG
+Raviraj    CG
+Ramesh     CG
+Samesh     CG
+6.11
+select ename,prj_name from emp_prj_vw;
+
+ENAME      PRJ_NAME
+---------- ----------
+Ravi       robotics
+Raviraj    robotics
+Ramesh     robotics
+Samesh     robotics
+Mahima     robotics
+Mahi       robotics
+Asha       robotics
+Ravi       CG
+Raviraj    CG
+Ramesh     CG
+6.12
+ select count(empno) from emp group by extract(month from date_join);
+
+COUNT(EMPNO)
+------------
+           1
+           4
+           9
+6.13
+create index name_job_index on emp(ename,job);
+
+Index created.
+
+

@@ -1,0 +1,540 @@
+SQL> select * from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND
+--- ----- ---------- ---------- --------- --------- ----------
+D1  P1    MARKET              4 24-JUN-02 23-MAY-03     400000
+D2  P1    MARKET              2 25-JUL-02 20-JUN-03     200000
+D3  P2    TRENDS              3 05-AUG-05 10-APR-06     300000
+D1  P3    SHARES              5 03-APR-07 08-MAR-08     500000
+D4  P2    TRENDS              7 12-MAY-10 10-FEB-11     700000
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET
+--- ---------- --------- -----------
+D1  MARKETING  CHN            500000
+D2  RESEARCH   MNG            300000
+D3  IT         BNG            400000
+D4  HR         BNG            200000
+D5  ACCOUNTS   BNG            500000
+    CORPORATE  HYD            700000
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       101 Ravi       MGR                  10-OCT-85      32000       1000 D1
+02-OCT-01 P1
+
+       102 RaviRaj    CLRK                 10-DEC-80      24000      11000 D1
+12-NOV-00 P3
+
+       111 Raghu      GM                   10-DEC-74      45000      15000
+03-DEC-85
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       150 Ram        CEO                  10-DEC-70      60000      30000
+03-DEC-90
+
+       103 Anmol      CLRK                 10-DEC-80      32000      10000 D1
+02-OCT-01 P1
+
+       109 Shreya     CLRK                 02-OCT-80      45000      15000 D1
+02-OCT-02 P3
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       125 Manu       A.MGR                10-DEC-80      24000      11000 D4
+02-OCT-02 P2
+
+       104 Reshma     CLRK                 02-OCT-80      50000      17000 D2
+02-OCT-05 P1
+
+       106 Aman       MGR                  02-OCT-86      47000       1000 D2
+02-OCT-02 P1
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       123 Mahesh     MGR              111 10-DEC-74      35000       1000 D3
+02-OCT-02 P2
+
+       108 Saritha    CLRK                 10-DEC-70      27000      10000 D1
+02-OCT-85 P1
+
+       110 Varshi     CLRK                 10-DEC-80      50000      17000 D1
+02-OCT-01 P3
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       112 Abay       CLRK                 10-DEC-80      21000       9000 D1
+10-DEC-03 P3
+
+
+13 rows selected.
+
+SQL>  select * from emp where sal>25000 or deptno = 'D1';
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       101 Ravi       MGR                  10-OCT-85      32000       1000 D1
+02-OCT-01 P1
+
+       102 RaviRaj    CLRK                 10-DEC-80      24000      11000 D1
+12-NOV-00 P3
+
+       111 Raghu      GM                   10-DEC-74      45000      15000
+03-DEC-85
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       150 Ram        CEO                  10-DEC-70      60000      30000
+03-DEC-90
+
+       103 Anmol      CLRK                 10-DEC-80      32000      10000 D1
+02-OCT-01 P1
+
+       109 Shreya     CLRK                 02-OCT-80      45000      15000 D1
+02-OCT-02 P3
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       104 Reshma     CLRK                 02-OCT-80      50000      17000 D2
+02-OCT-05 P1
+
+       106 Aman       MGR                  02-OCT-86      47000       1000 D2
+02-OCT-02 P1
+
+       123 Mahesh     MGR              111 10-DEC-74      35000       1000 D3
+02-OCT-02 P2
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       108 Saritha    CLRK                 10-DEC-70      27000      10000 D1
+02-OCT-85 P1
+
+       110 Varshi     CLRK                 10-DEC-80      50000      17000 D1
+02-OCT-01 P3
+
+       112 Abay       CLRK                 10-DEC-80      21000       9000 D1
+10-DEC-03 P3
+
+
+12 rows selected.
+
+SQL> select ename as 'Employee Name', sal as 'SALARY' from emp where salary between 25199 and 35201;
+select ename as 'Employee Name', sal as 'SALARY' from emp where salary between 25199 and 35201
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select ename as Employee Name, sal as SALARY from emp where salary between 25199 and 35201;
+select ename as Employee Name, sal as SALARY from emp where salary between 25199 and 35201
+                         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select ename as Employee Name, sal as SALARY from emp where sal between 25199 and 35201;
+select ename as Employee Name, sal as SALARY from emp where sal between 25199 and 35201
+                         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select ename as EmployeeName, sal as SALARY from emp where sal between 25199 and 35201;
+
+EMPLOYEENA     SALARY                                                           
+---------- ----------                                                           
+Ravi            32000                                                           
+Anmol           32000                                                           
+Mahesh          35000                                                           
+Saritha         27000                                                           
+
+SQL> select ename from emp join dept on emp.deptno=dept.dno and dept.loc in('BNG','MUB','HYD');
+select ename from emp join dept on emp.deptno=dept.dno and dept.loc in('BNG','MUB','HYD')
+                                                           *
+ERROR at line 1:
+ORA-00904: "DEPT"."LOC": invalid identifier 
+
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                                VARCHAR2(3)
+ DNAME                                              VARCHAR2(10)
+ LOCATION                                           VARCHAR2(9)
+ DEPT_BUDGET                                        NUMBER(7)
+
+SQL> select ename from emp join dept on emp.deptno=dept.dno and dept.location in('BNG','MUB','HYD');
+
+ENAME                                                                           
+----------                                                                      
+Manu                                                                            
+Mahesh                                                                          
+
+SQL> spool off;
+SQL> select distinct deptno from emp;
+
+DEP                                                                             
+---                                                                             
+D1                                                                              
+D4                                                                              
+D3                                                                              
+                                                                                
+D2                                                                              
+
+SQL> select * from emp order by deptno, sal desc;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       110 Varshi     CLRK                 10-DEC-80      50000      17000 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       109 Shreya     CLRK                 02-OCT-80      45000      15000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+       101 Ravi       MGR                  10-OCT-85      32000       1000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       103 Anmol      CLRK                 10-DEC-80      32000      10000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       108 Saritha    CLRK                 10-DEC-70      27000      10000 D1   
+02-OCT-85 P1                                                                    
+                                                                                
+       102 RaviRaj    CLRK                 10-DEC-80      24000      11000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       112 Abay       CLRK                 10-DEC-80      21000       9000 D1   
+10-DEC-03 P3                                                                    
+                                                                                
+       104 Reshma     CLRK                 02-OCT-80      50000      17000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Aman       MGR                  02-OCT-86      47000       1000 D2   
+02-OCT-02 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     MGR              111 10-DEC-74      35000       1000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       125 Manu       A.MGR                10-DEC-80      24000      11000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       150 Ram        CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       111 Raghu      GM                   10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+
+13 rows selected.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table manager(empno,ename,job,deptno,salary) as select empno,ename,job,deptno,sal;
+create table manager(empno,ename,job,deptno,salary) as select empno,ename,job,deptno,sal
+                                                                                       *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> create table manager(empno,ename,job,deptno,salary) as select empno,ename,job,deptno,sal from emp;
+
+Table created.
+
+SQL> select * from manager;
+
+     EMPNO ENAME      JOB       DEP     SALARY                                  
+---------- ---------- --------- --- ----------                                  
+       101 Ravi       MGR       D1       32000                                  
+       102 RaviRaj    CLRK      D1       24000                                  
+       111 Raghu      GM                 45000                                  
+       150 Ram        CEO                60000                                  
+       103 Anmol      CLRK      D1       32000                                  
+       109 Shreya     CLRK      D1       45000                                  
+       125 Manu       A.MGR     D4       24000                                  
+       104 Reshma     CLRK      D2       50000                                  
+       106 Aman       MGR       D2       47000                                  
+       123 Mahesh     MGR       D3       35000                                  
+       108 Saritha    CLRK      D1       27000                                  
+
+     EMPNO ENAME      JOB       DEP     SALARY                                  
+---------- ---------- --------- --- ----------                                  
+       110 Varshi     CLRK      D1       50000                                  
+       112 Abay       CLRK      D1       21000                                  
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  P1    MARKET              4 24-JUN-02 23-MAY-03     400000                  
+D2  P1    MARKET              2 25-JUL-02 20-JUN-03     200000                  
+D3  P2    TRENDS              3 05-AUG-05 10-APR-06     300000                  
+D1  P3    SHARES              5 03-APR-07 08-MAR-08     500000                  
+D4  P2    TRENDS              7 12-MAY-10 10-FEB-11     700000                  
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  MARKETING  CHN            500000                                            
+D2  RESEARCH   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D4  HR         BNG            200000                                            
+D5  ACCOUNTS   BNG            500000                                            
+    CORPORATE  HYD            700000                                            
+
+6 rows selected.
+
+SQL> desc proj;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                    NOT NULL VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+ PRJ_FUND                                           NUMBER(7)
+
+SQL> select prj_no, prj_name from proj where dno='D2' and prj_credit>5;
+
+no rows selected
+
+SQL> select * from emp where mgrid= 111;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     MGR              111 10-DEC-74      35000       1000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+
+SQL> select * from emp where name like ('M%' or 'R%') and length(ename)=6;
+select * from emp where name like ('M%' or 'R%') and length(ename)=6
+                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select * from emp where ename like ('M%' or 'R%') and length(ename)=6;
+select * from emp where ename like ('M%' or 'R%') and length(ename)=6
+                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select * from emp where ename like 'M%' or ename like 'R%' and length(ename)=6;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR                10-DEC-80      24000      11000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Reshma     CLRK                 02-OCT-80      50000      17000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       123 Mahesh     MGR              111 10-DEC-74      35000       1000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+
+SQL> select * from emp where ename not like 'S%';
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR                  10-OCT-85      32000       1000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 RaviRaj    CLRK                 10-DEC-80      24000      11000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM                   10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Ram        CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+       103 Anmol      CLRK                 10-DEC-80      32000      10000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       125 Manu       A.MGR                10-DEC-80      24000      11000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       104 Reshma     CLRK                 02-OCT-80      50000      17000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Aman       MGR                  02-OCT-86      47000       1000 D2   
+02-OCT-02 P1                                                                    
+                                                                                
+       123 Mahesh     MGR              111 10-DEC-74      35000       1000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       110 Varshi     CLRK                 10-DEC-80      50000      17000 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       112 Abay       CLRK                 10-DEC-80      21000       9000 D1   
+10-DEC-03 P3                                                                    
+                                                                                
+
+11 rows selected.
+
+SQL> select ename from emp where ename not like 'R%';
+
+ENAME                                                                           
+----------                                                                      
+Anmol                                                                           
+Shreya                                                                          
+Manu                                                                            
+Aman                                                                            
+Mahesh                                                                          
+Saritha                                                                         
+Varshi                                                                          
+Abay                                                                            
+
+8 rows selected.
+
+SQL> select ename from emp where ename like '_av%j';
+
+ENAME                                                                           
+----------                                                                      
+RaviRaj                                                                         
+
+
+SQL> select ename,comm from emp;
+
+ENAME            COMM                                                           
+---------- ----------                                                           
+Ravi             1000                                                           
+RaviRaj         11000                                                           
+Raghu           15000                                                           
+Ram             30000                                                           
+Anmol           10000                                                           
+Shreya          15000                                                           
+Manu            11000                                                           
+Reshma          17000                                                           
+Aman             1000                                                           
+Mahesh           1000                                                           
+Saritha         10000                                                           
+
+ENAME            COMM                                                           
+---------- ----------                                                           
+Varshi          17000                                                           
+Abay             9000                                                           
+
+13 rows selected.
+
+
+SQL> select ename from emp where comm is null;
+
+no rows selected
+
+SQL> spool off;
+
+SQL> commit;
+
+Commit complete.

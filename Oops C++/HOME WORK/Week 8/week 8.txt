@@ -1,0 +1,217 @@
+Shubham Kumar Code
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+protected:
+    int id;
+    char name[20];
+
+public:
+    void setData()
+    {
+        cout << "Enter Id: ";
+        cin >> id;
+        cout << "Enter Name: ";
+        cin >> name;
+    }
+    void display()
+    {
+        cout << "Id is " << id << endl;
+        cout << "Name is " << name << endl;
+    }
+};
+class Exam : virtual public Student
+{
+protected:
+    int examId;
+    float totMarks;
+
+public:
+    void setExamData()
+    {
+        cout << "Enter Exam Id: ";
+        cin >> examId;
+        cout << "Enter Total Marks: ";
+        cin >> totMarks;
+    }
+    void displayExamData()
+    {
+        cout << "Exam Id is " << examId << endl;
+        cout << "Total marks is " << totMarks << endl;
+    }
+};
+
+class Sports : virtual public Student
+{
+protected:
+    char sName[20];
+    int sId;
+
+public:
+    void setSportsData()
+    {
+        cout << "Enter Sport Id: ";
+        cin >> sId;
+        cout << "Enter Sports Name: ";
+        cin >> sName;
+    }
+    void displaySportsData()
+    {
+        cout << "Sport Id is " << sId << endl;
+        cout << "Sport Name is " << sName << endl;
+    }
+};
+
+class Result : public Exam, public Sports
+{
+private:
+    float obtainedMarks;
+
+public:
+    void setResultData()
+    {
+        setData();
+        setExamData();
+        setSportsData();
+        cout << "Enter Obtained Marks: ";
+        cin >> obtainedMarks;
+    }
+    void displayResultData()
+    {
+        display();
+        displayExamData();
+        displaySportsData();
+        cout << "Obtained Marks is " << obtainedMarks;
+    }
+};
+int main()
+{
+    Result r1;
+    r1.setResultData();
+    cout << endl;
+    cout << "---------------------------------------------------------------------------------------";
+    r1.displayResultData();
+    return 0;
+}
+
+
+Q2.
+
+#include <iostream>
+using namespace std;
+
+class Employee
+{
+protected:
+    char name[20];
+    int code;
+
+public:
+    void setData()
+    {
+        cout << "Enter Name: ";
+        cin >> name;
+        cout << "Enter Code: ";
+        cin >> code;
+    }
+    void display()
+    {
+        cout << "Name is " << name << endl;
+        cout << "Code is " << code << endl;
+    }
+};
+class Account : virtual public Employee
+{
+protected:
+    float pay;
+
+public:
+    void setData()
+    {
+        cout << "Enter Pay: ";
+        cin >> pay;
+    }
+    void display()
+    {
+        cout << "Pay is " << pay << endl;
+    }
+};
+
+class Admin : virtual public Employee
+{
+protected:
+    float expYears;
+
+public:
+    void setData()
+    {
+        cout << "Enter Experiences: ";
+        cin >> expYears;
+    }
+    void display()
+    {
+        cout << "Experience is " << expYears << endl;
+    }
+};
+
+class Master : public Account, public Admin
+{
+public:
+    void setData()
+    {
+        Employee::setData();
+        Account::setData();
+        Admin::setData();
+    }
+    void display()
+    {
+        Employee::display();
+        Account::display();
+        Admin::display();
+    }
+    void update()
+    {
+        cout << "Enter updated pay: ";
+        cin >> pay;
+        cout << "Enter updated experience: ";
+        cin >> expYears;
+    }
+};
+int main()
+{
+    Master m1;
+    int ch;
+    while (true)
+    {
+        cout << "\n1.Insert\n2.Update\n3.Display\n";
+        cout << "\nEnter your choice: ";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            m1.setData();
+            break;
+        case 2:
+            m1.update();
+            break;
+        case 3:
+            m1.display();
+            break;
+        default:
+            cout << "\nInvalid choice\n";
+            exit(0);
+        }
+    }
+    return 0;
+}
+
+

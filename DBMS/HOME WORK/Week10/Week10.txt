@@ -1,0 +1,126 @@
+10.1 Write a PL/SQL trigger to fire when there is an updation of salary of any employee and 
+record the Empno, Dept. Name and Old Salary, date on which salary is modified and 
+user who modified information in the table SAL_MOD (Empno, Dname, Old_Sal, 
+Mod_Date, Modifier).
+
+ create table sal_mod(
+       emp_no number(4),
+       dname varchar2(20),
+       old_sal number(11,2),
+       mod_date date,
+       modifier varchar(20)
+    );
+
+
+ set serveroutput on;
+ create or replace trigger sal_up after update of sal on emp for each row
+  
+    declare
+       dept_name dept.dname%type;
+    begin
+       select dname into dept_name from dept where dno = :old.deptno;
+       if updating ('sal') then
+               dbms_output.put_line('Emp no = ' || :old.empno || '-- Old salary = ' || :old.sal || '-- New salary = '
+               || :new.sal || ' Department = ' || dept_name);
+              insert into sal_mod values(:old.empno,dept_name,:old.sal,sysdate,user);
+      end if;
+   end;
+   /
+
+Trigger created.
+
+SQL> update emp set sal=30000 where empno=112;
+Emp no = 112-- Old salary = 21000-- New salary = 30000 Department = Marketing
+
+1 row updated.
+
+SQL> select*from sal_mod;
+
+    EMP_NO DNAME                   OLD_SAL MOD_DATE  MODIFIER
+---------- -------------------- ---------- --------- --------------------
+       112 Marketing                 21000 07-NOV-23 SYSTEM
+
+
+
+********************************************************************************************************************
+10.2 Write a trigger to be invoked when a department on a project updates Prj_fund by 
+adding additional fund. Depending on project duration lapsed, display the message for 
+additional fund for which department is eligible on that project. The project duration 
+lapsed is calculated as difference between current_date (user entered) and start_date. 
+Additional fund eligible is calculated according to the following criteria:
+If project duration lapsed is less than 50% then display- You are eligible for Rs. 
+xxxx(xxxx is 70% of additional fund requested) else display- You are eligible for 
+Rs.xxxx (xxxx is40% of additional fund requested).
+
+
+ set serveroutput on;
+ create or replace trigger trig1 after update on proj for each row
+    declare
+       proj_duration number(10);
+       lapsed_duration number(10);
+       fund number(10);
+    begin
+       proj_duration := :old.end_date - :old.strt_date;
+       lapsed_duration := sysdate - :old.strt_date;
+       if lapsed_duration < (0.5 * proj_duration) then
+              fund := (:new.proj_fund - :old.proj_fund ) * 0.7;
+              dbms_output.put_line('you are eligible for Rs.' || fund );
+      else
+              fund := (:new.proj_fund - :old.proj_fund ) * 0.4;
+              dbms_output.put_line('you are eligible for Rs.' || fund );
+      end if;
+   end;
+   /
+
+Trigger created.
+
+SQL> update proj set proj_fund = proj_fund + 150000 where dno='D1';
+you are eligible for Rs.60000
+you are eligible for Rs.60000
+
+2 rows updated.
+
+SQL> select*from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE   PROJ_FUND
+--- ----- ---------- ---------- --------- --------- ----------
+D1  p1    Booking             4 05-FEB-22 03-AUG-22     550000
+D2  p1    Auomobile           2 14-MAR-10 23-JUN-12     200000
+D3  p2    Ecommerce           3 16-JUL-15 18-APR-16     300000
+D1  p3    Stocks              5 28-SEP-17 05-OCT-20     650000
+D4  p2    Stocks              7 25-OCT-16 07-NOV-19     700000
+D2  p3    Retail              8 09-APR-20 09-APR-23     200000
+D2  p2    Android             7 06-FEB-19 07-JUL-20     500000
+D7  p2    Java                8 12-SEP-18 12-SEP-19     200000
+
+8 rows selected.
+
+
+
+********************************************************************************************************************
+10.3 Write a PL/SQL block trigger to do INSERT/UPDATE/DELETE operation only during 
+week days. Raise an exception if the day is SAT or SUN and also display user who 
+initiated operation.
+
+
+ set serveroutput on;
+ create or replace trigger trig before insert or update or delete on emp for each row
+    begin
+       if inserting or updating or deleting then
+               if to_char(sysdate,'DY') = 'SUN' or to_char(sysdate,'DY') = 'SAT' then
+                       raise_application_error(-20111,'No changes can be made');
+               end if;
+       end if;
+    end;
+    /
+
+Trigger created.
+
+
+SQL> update emp set sal = 1234 where empno=101;
+update emp set sal = 1234 where empno=101
+       *
+ERROR at line 1:
+ORA-20111: Changes can only be made on weekdays
+ORA-06512: at "SYSTEM.TRI", line 4
+ORA-04088: error during execution of trigger 'SYSTEM.TRI'

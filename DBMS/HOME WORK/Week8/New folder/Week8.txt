@@ -1,0 +1,88 @@
+8.1 Write a cursor to display ENAME and SAL of all employees drawing salary more than 30000/-. 
+
+SQL> set serveroutput on;
+SQL> declare
+  2    cursor emp_sal is
+  3    select ename, sal from emp where sal>30000;
+  4    name emp.ename%type;
+  5    sal emp.sal%type;
+  6    begin
+  7    open emp_sal;
+  8    loop
+  9    fetch emp_sal into name, sal;
+ 10   exit when emp_sal%notfound;
+ 11   dbms_output.put_line('name: ' || name || ' sal : ' || sal );
+ 12   end loop;
+ 13   close emp_sal;
+ 14   end;
+ 15   /
+name: Ravi sal : 32000
+name: Raghu sal : 45000
+name: Ram sal : 60000
+name: Anmol sal : 32000
+name: Shreya sal : 45000
+name: Reshma sal : 50000
+name: Aman sal : 47000
+name: Mahesh sal : 35000
+name: Varshi sal : 50000
+
+PL/SQL procedure successfully completed.
+
+********************************************************************************************************************
+
+8.2 Write a cursor PL/SQL block to allocate incentives to employees and to the corresponding departments handling a project from the Prj_Fund reserved. According to the Prj_Credits a department is having on the Project, a portion of Prj_Fund is given to the department on that project. E.g. Credit is 2 , allocate 20%. Corresponding department has to share 70% of amount received among all employees who are working on that project equally. Remaining 30% is added to Dept_Budget.
+
+
+
+
+********************************************************************************************************************
+
+8.3 Write a parameterized cursor to display employee with the user given parameters- job and deptno ( Using Cursor for loop) 
+
+SQL> set serveroutput on;
+SQL> declare
+  2    cursor cur_emp(emp_job varchar2,emp_dno varchar2) is
+  3    select empno,ename,job,sal,deptno from emp
+  4    where job = emp_job and deptno = emp_dno;
+  5
+  6    begin
+  7    for i in cur_emp(&emp_job,&emp_dno)
+  8    loop
+  9    dbms_output.put_line( '(' ||i.empno || ' , ' || i.ename || ' , ' || i.job || ' , ' || i.deptno || ' ) ' );
+ 10   end loop;
+ 11   end;
+ 12   /
+Enter value for emp_job: 'MGR'
+Enter value for emp_dno: 'D2'
+old   7:   for i in cur_emp(&emp_job,&emp_dno)
+new   7:   for i in cur_emp('MGR','D2')
+(106 , Aman , MGR , D2 )
+
+PL/SQL procedure successfully completed.
+
+
+
+********************************************************************************************************************
+
+8.4 Write a parameterized cursor to display first two highest paid employees details (Name, Salary, Department Name) working on a project. The Prj_Id is the user given 
+parameter.
+
+SQL> declare
+  2    cursor emp_prj(project_id varchar) is
+  3    select ename, sal, dname from emp e , dept d where e.deptno = d.dno and proj_id= project_id
+  4    order by sal desc fetch first 2 rows only;
+  5    begin
+  6    for i in emp_prj(&project_id)
+  7    loop
+  8    dbms_output.put_line( '(' ||i.ename || ' , ' || i.sal || ' , ' || i.dname || ' ) ' );
+  9
+ 10    end loop;
+ 11   end;
+ 12   /
+Enter value for project_id: 'p1'
+old   6:   for i in emp_prj(&project_id)
+new   6:   for i in emp_prj('p1')
+(Reshma , 50000 , Research )
+(Aman , 47000 , Research )
+
+PL/SQL procedure successfully completed.

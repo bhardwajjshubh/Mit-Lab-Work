@@ -1,0 +1,174 @@
+/* Program Name- 1. Write a program to compute cube of a number using inline function.
+Name - Shubham Kumar
+Reg No. - 230970035
+Date - 28/08/2023
+*/
+
+#include<iostream>
+using namespace std;
+
+inline int cube(int s){
+	return s*s*s;
+}
+
+int main(){
+	
+	int n;
+	cout<<"Enter an integer "<<endl;
+	cin>>n;
+	
+	cout<<"The Cube root of "<<n<<" is "<<cube(n);
+	return 0;
+		
+}
+
+/*
+Program Name - 2. Write a function to determine if the given string is a palindrome or not. Accept 
+string in the main function and pass that as a parameter to the function (use c-style 
+strings)
+Name - Shubham Kumar
+Reg No. - 230970035
+Date - 28/08/2023
+*/
+#include <iostream>
+#include<string.h>
+using namespace std;
+
+void palindrome(string s){
+	int length,i;
+	 int flag = 0;
+	length = s.length();
+	for(i=0;i < length ;i++){
+        if(s[i] != s[length-i-1]){
+            flag = 1;
+            break;
+           }
+        }
+    if (flag) {
+        cout << s << " is not a palindrome" << endl; 
+    }    
+    else {
+        cout << s << " is a palindrome" << endl; 
+    }
+}
+int main(){
+    string string1;
+    cout << "Enter a string: "; cin >> string1;
+    palindrome(string1);
+    return 0;
+}
+
+
+/*
+program Name--> 3. Write an interactive program in C++ for swapping two integers, floats, and 
+characters using function-overloading concept. 
+Name - Shubham Kumar
+Reg No. - 230970035
+Date - 28/08/2023
+*/
+
+#include <iostream>
+using namespace std;
+
+void swap(int x, int y)
+{
+    int g;
+    g = x;
+    x = y;
+    y = g;
+    cout << "x = " << x << " y = " << y << endl;
+}
+
+void swap(double num1, double num2)
+{
+    float i;
+    i = num1;
+    num1 = num2;
+    num2 = i;
+    cout << "num1 = " << num1 << " num2 = " << num2 << endl;
+}
+
+void swap(char s1, char s2)
+{
+    char s3;
+    s3 = s1;
+    s1 = s2;
+    s2 = s3;
+
+    cout << "s1 = " << s1 << " s2 = " << s2 << endl;
+}
+
+int main()
+{
+    int a, b, n;
+    float c, d;
+    char e, f;
+
+    cout << "Enter the Choice 1 for Int swap, 2 for float swap, 3 for char swap" << endl;
+    cin >> n;
+    switch (n)
+    {
+    case 1:
+        swap(10, 20);
+        break;
+    case 2:
+        swap(1.0, 2.4);
+        break;
+    case 3:
+        swap('A', 'B');
+        break;
+    }
+}
+
+/*
+Program Name - 5.Given that an EMPLOYEE structure contains following members. 
+Data members: Employee_Number, Employee_Name, Basic, DA, IT, Net_Sal. Write functions: To 
+read the data, calculate net salary and display the net salary. Write a C++ program 
+to read the data of N employees and compute Net salary of each employee. (DA= 
+12% of Basic and Income Tax (IT) = 18% of the gross salary) 
+Name - Shubham Kumar
+Reg No. - 230970035
+Date - 28/08/2023
+*/
+#include<iostream>
+using namespace std;
+
+struct Salary{
+	int eNo;
+	
+};
+
+void salary_detail(){
+string Employee_name;
+float Basic,DA,IT,Net_Sal,gross_sal,net_salary;
+	
+cout<<"Enter Employee Name"<<endl;
+cin>>Employee_name;
+	
+cout<<"Enter the Basic Salary of the employee"<<endl;
+cin>>Basic;
+	
+DA = 12*(Basic/100);
+	
+gross_sal = DA + Basic;
+	
+IT = 18*(gross_sal/100);
+	
+net_salary = gross_sal - IT;
+	
+cout<<"The DA of the Employee is "<<DA<<endl;
+cout<<"The IT tax of the employee is "<<IT<<endl;
+cout<<"The Net Salary of the Employee is "<<net_salary<<endl;
+}
+
+int main(){
+	
+	struct Salary sal;
+cout<<"Enter Empoyee Number"<<endl;
+cin>>sal.eNo;	
+	
+for(int i=1;i<=sal.eNo;i++){
+salary_detail();	
+}
+return 0;	
+}

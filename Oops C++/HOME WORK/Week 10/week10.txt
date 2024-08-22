@@ -1,0 +1,167 @@
+type ls to see the file name
+
+type cat filename to see the content
+
+
+
+
+//program to create a single line text file
+
+//230970029
+//6-11-2023
+#include <iostream>
+#include <fstream>
+using namespace std;
+void createFile(string fileName){
+ string fileString;
+ ofstream outFile(fileName);
+ cout << "Enter some text into the file: ";
+ cin.ignore();
+ getline(cin, fileString);
+ outFile << fileString;
+ outFile.close();
+}
+void convertCase(string fileName) {
+ ifstream inFile(fileName);
+ ofstream outFile("temp.txt");
+
+ char ch;
+ while (inFile.get(ch)) {
+ if (islower(ch)) {
+
+ ch = toupper(ch);
+ cout<<ch;
+ outFile<<ch;
+ } else if (isupper(ch)) {
+ ch = tolower(ch);
+ cout<<ch;
+ outFile<<ch;
+ }
+
+ }
+ inFile.close();
+ outFile.close();
+
+}
+void displayContent(string fileName) {
+ ifstream inFile(fileName);
+ char ch;
+ while (inFile.get(ch)) {
+ cout << ch;
+ }
+ inFile.close();
+}
+int countCharA(string fileName) {
+ ifstream inFile(fileName);
+ char ch;
+ int count = 0;
+ while (inFile.get(ch)) {
+ if (ch == 'a'||ch=='A') {
+ count++;
+ }
+ }
+ inFile.close();
+ return count;
+}
+int main() {
+ int choice;
+ string fileName;
+ cout << "Enter the file name: ";
+ cin >> fileName;
+ createFile(fileName);
+ while(true){
+ cout << "\nMenu\n";
+ cout << "1. Convert case\n";
+ cout << "2. Display content\n";
+ cout << "3. Count occurrences of 'a'\n";
+ cout << "Enter your choice: ";
+ cin >> choice;
+ switch (choice) {
+ case 1:
+ cout << "Case conversion:";
+ convertCase(fileName);
+ break;
+ case 2:
+ cout << "\nFile content:\n";
+ displayContent(fileName);
+ break;
+ case 3:
+ cout << "\nNumber of 'a' occurrences: " << countCharA(fileName) <<
+endl;
+ break;
+
+ default:
+ cout << "\nInvalid choice\n";
+ exit(0);
+ }
+ }
+ return 0;
+}
+
+
+
+
+
+
+
+
+//program to create a multi line text file and count number of chars
+
+//230970029
+//06-11-2023
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+void createFile(string fileName){
+    string fileString;
+    ofstream outFile(fileName);
+    cout << "Enter content of the file (press x to stop writing): ";
+    cin.ignore();
+    getline(cin, fileString,'x');
+    outFile << fileString;
+    outFile.close();
+}
+
+void countChars(string fileName){
+    ifstream inFile(fileName);
+    char ch;
+    int chars = 0,digits=0,space=0,line=0,symb=0,tot=0;
+
+    while (inFile.get(ch)) {
+        if(isalpha(ch)){
+            chars++;
+        }
+        else if(isdigit(ch)){
+            digits++;
+        }
+        else if(ch=='\n'){
+            line++;
+        }
+        else if(isspace(ch)){
+            space++;
+        }
+        else{
+            symb++;
+        }
+        tot++;
+    }
+    cout<<"\nTotal characters: "<<tot<<endl;
+    cout << "Alphabet count: " << chars << endl;
+    cout << "Digit count: " << digits << endl;
+    cout << "Line count: " << line << endl;
+    cout << "Space count: " << space << endl;
+    cout << "Symbol count: " << symb << endl;
+
+    inFile.close();
+}
+int main(){
+    string fileName;
+    cout << "Enter the file name: ";
+    cin >> fileName;
+    createFile(fileName);
+    countChars(fileName);
+
+    return 0;
+}

@@ -1,0 +1,211 @@
+7.1 Write a PL/SQL block to find the sum of the digits of a given number. 
+
+ set serveroutput on;
+ declare
+  
+       n number := &n;
+       add number := 0;
+       i number;
+  
+    begin
+  
+       dbms_output.put_line('Given number is: '||n);
+      for i in 1..n loop
+ 
+              add := add + mod(n,10);
+              n := trunc(n/10);
+      end loop;
+      dbms_output.put_line('Sum : '||add);
+ 
+   end;
+   /
+Enter value for n: 12
+old   3:        n number := &n;
+new   3:        n number := 12;
+Given number is: 12
+Sum : 3
+
+PL/SQL procedure successfully completed.
+
+********************************************************************************************************************
+
+7.2 Write a PL/SQL block to check an input string is palindrome or not palindrome. 
+
+ declare
+       str varchar(10) :=&str;
+       temp varchar(10);
+       l number;
+       i number;
+    begin
+       l := length(str);
+       dbms_output.put_line('Original String: '||str);
+  
+      for i in 1..l
+      loop
+ 
+              temp := temp || substr(str,l,1);
+ 
+              if l=0 then
+                      exit;
+              end if;
+              l := l-1;
+ 
+      end loop;
+ 
+ 
+      if str = temp then
+              dbms_output.put_line('Palindrome');
+      else
+              dbms_output.put_line('Not palindrome');
+      end if;
+   end;
+   /
+Enter value for str: 'aman'
+old   2:        str varchar(10) :=&str;
+new   2:        str varchar(10) :='aman';
+Original String: aman
+Not palindrome
+
+PL/SQL procedure successfully completed.
+
+Enter value for str: 'radar'
+old   2:        str varchar(10) :=&str;
+new   2:        str varchar(10) :='radar';
+Original String: radar
+Palindrome
+
+PL/SQL procedure successfully completed.
+
+********************************************************************************************************************
+
+7.3 Write a PL/SQL block to accept employee number and display Employee Name, Department name, salary of employees in the format – ‘RAVI works in Marketing department and  draws 32000/- as salary’.
+
+ declare
+    eno emp.empno%type;
+    ename emp.ename%type;
+    dname dept.dname%type;
+    sal emp.sal%type;
+  
+    begin
+    eno := &eno;
+    select ename,sal, dname into ename,sal,dname from emp e, dept d where e.deptno=d.dno and empno = eno;
+   dbms_output.put_line(ename || ' works in ' || dname || ' department and draws ' || sal || '/- as salary.');
+   end;
+   /
+Enter value for eno: 129
+old   8:   eno := &eno;
+new   8:   eno := 129;
+Jake works in Quality department and draws 22000/- as salary.
+
+PL/SQL procedure successfully completed.
+
+********************************************************************************************************************
+7.4 Create a Table EMPSAL with fields-Empno, Empname, Sal, HRA, DA, Gross Salary, PF, Net Salary (assume appropriate datatype and size). Write a PL/SQL block to accept an employee number existing in EMP table and calculate HRA, DA, Gross Salary, PF, Net_Salary of that employee. Insert the empno, empname, Sal, HRA, DA, Gross Salary, PF, Net Salary into the table EMPSAL: 
+Use the following formula to calculate salary components-  
+HRA=50% of Sal 
+DA=20% of Sal 
+PF=12% of Sal. 
+Gross_sal= Sal+ HRA+DA 
+Net_Sal= Gross_sal-PF 
+
+ create table empsal(
+      emp_no number(4),
+      emp_name varchar2(10),
+      sal number(7,2),
+      hra number(7,2),
+      da number(7,2),
+      pf number(7,2),
+      gross_sal number(7,2),
+      net_sal number(7,2)
+    );
+
+Table created.
+
+ declare
+      eno emp.empno%type;
+      ename emp.ename%type;
+      sal emp.sal%type;
+      hra empsal.hra%type;
+      da empsal.da%type;
+      gross_sal empsal.gross_sal%type;
+      pf empsal.pf%type;
+      net_sal empsal.net_sal%type;
+ 
+    begin
+    eno := &eno;
+    select ename , sal into ename,sal from emp where empno = eno;
+    hra := sal * 0.5;
+    da := sal * 0.2;
+    pf := sal * 0.12;
+    gross_sal := sal + hra + da;
+    net_sal := gross_sal - pf;
+ 
+    dbms_output.put_line('Employee Details');
+    dbms_output.put_line('_______________________________________');
+    dbms_output.put_line('Number : ' || eno);
+    dbms_output.put_line('Name : ' || ename);
+    dbms_output.put_line('Salary : ' || sal);
+    dbms_output.put_line('HRA : ' || hra);
+   dbms_output.put_line('DA : ' || da);
+    dbms_output.put_line('PF : ' || pf);
+    dbms_output.put_line('Gross Salary : ' || gross_sal);
+    dbms_output.put_line('Net Salary : ' || net_sal);
+ 
+    insert into empsal values (eno,ename,sal,hra,da,pf,gross_sal,net_sal);
+ 
+    end;
+    /
+Enter value for eno: 125
+old  12:  eno := &eno;
+new  12:  eno := 125;
+Employee Details
+_______________________________________
+Number : 125
+Name : Manu
+Salary : 24000
+HRA : 12000
+DA : 4800
+PF : 2880
+Gross Salary : 40800
+Net Salary : 37920
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from empsal;
+
+    EMP_NO EMP_NAME          SAL        HRA         DA         PF  GROSS_SAL    NET_SAL
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       125 Manu            24000      12000       4800       2880      40800      37920
+
+
+********************************************************************************************************************
+
+7.5 Write a PL/SQL block to calculate the area of a circle for a value of radius varying from 3 to 7. Store the Radius and the corresponding values of calculated Area in an empty table named CIRCLE, consisting of two columns radius & area.
+
+ create table circle(
+      radius number(3,1),
+      area number(5,1)
+      );
+
+Table created.
+
+ set serveroutput on;
+ declare
+      rad circle.radius%type;
+      area circle.area%type;
+      begin
+      for i in 3..7 loop
+      rad := i;
+      area := 3.14 * power(rad,2);
+      dbms_output.put_line('area of circle with radius = ' || rad || ' is ' || area);
+      insert into circle values(rad,area);
+   end loop;
+   end;
+    /
+area of circle with radius = 3 is 28.3
+area of circle with radius = 4 is 50.2
+area of circle with radius = 5 is 78.5
+area of circle with radius = 6 is 113
+area of circle with radius = 7 is 153.9
+
+PL/SQL procedure successfully completed.

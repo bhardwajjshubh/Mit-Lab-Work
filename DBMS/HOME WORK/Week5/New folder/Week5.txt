@@ -1,0 +1,220 @@
+5.1 List the minimum, maximum and average salaries and rename the column as min_sal, max_sal, avg_sal, total salary of the employees.
+
+SQL> select min(sal) as min_sal,max(sal) as max_sal,avg(sal) as avg_sal,sum(sal) as total_sal from emp;
+
+   MIN_SAL    MAX_SAL    AVG_SAL  TOTAL_SAL                                     
+---------- ---------- ---------- ----------                                     
+     21000      60000 34176.4706     581000   
+
+********************************************************************************************************************************************                                  
+
+5.2 List the Project names undertaken by Marketing Department
+
+SQL> select prj_name from proj,dept where proj.dno=dept.dno and dname='Marketing';
+
+PRJ_NAME                                                                        
+----------                                                                      
+Booking                                                                         
+Stocks                                                                          
+
+******************************************************************************************************************************************** 
+
+5.3 Display the employees name in capital, lower, 1 st character only capital, number of characters and 3 characters from 2nd position.
+
+SQL> select upper(ename) as capital,
+  2  lower(ename) as lowerr,
+  3  initcap(ename) as first_cap,
+  4  substr(ename,2,3) as sec_position,
+  5  length(ename) as length from emp;
+
+CAPITAL    LOWERR     FIRST_CAP  SEC_POSITION     LENGTH                        
+---------- ---------- ---------- ------------ ----------                        
+VAMSHI     vamshi     Vamshi     ams                   6                        
+JAKE       jake       Jake       ake                   4                        
+KAVRAJ     kavraj     Kavraj     avr                   6                        
+ARJUN      arjun      Arjun      rju                   5                        
+RAVI       ravi       Ravi       avi                   4                        
+RAVIRAJ    raviraj    Raviraj    avi                   7                        
+RAGHU      raghu      Raghu      agh                   5                        
+RAM        ram        Ram        am                    3                        
+ANMOL      anmol      Anmol      nmo                   5                        
+SHREYA     shreya     Shreya     hre                   6                        
+MANU       manu       Manu       anu                   4    
+RESHMA     reshma     Reshma     esh                   6                        
+AMAN       aman       Aman       man                   4                        
+MAHESH     mahesh     Mahesh     ahe                   6                        
+SARITHA    saritha    Saritha    ari                   7                        
+VARSHI     varshi     Varshi     ars                   6                        
+ABAY       abay       Abay       bay                   4                           
+
+17 rows selected.
+
+******************************************************************************************************************************************** 
+
+5.4 List the name of employees who are working under the manager ‘Raghu’.
+
+SQL> select ename from emp where mgrid in(select empno from emp where ename='Raghu');
+
+ENAME                                                                           
+----------                                                                      
+Anmol                                                                           
+Ravi                                                                            
+Varshi                                                                          
+Shreya                                                                          
+Aman                                                                            
+Mahesh                                                                          
+
+6 rows selected.
+
+******************************************************************************************************************************************** 
+5.5 Display department name, Max salary and Min salary in each department
+
+SQL> select dname,max(sal),min(sal) from dept,emp where dept.dno=emp.deptno group by dname;
+
+DNAME        MAX(SAL)   MIN(SAL)                                                
+---------- ---------- ----------                                                
+Marketing       50000      21000                                                
+HR              24000      24000                                                
+Research        50000      21000                                                
+Quality         23000      22000                                                
+IT              35000      23000                                                
+
+********************************************************************************************************************************************    
+
+5.6 Display number of employees working in each department and their department name.
+
+SQL> select count(empno),dname from emp,dept where emp.deptno=dept.dno group by dname;
+
+COUNT(EMPNO) DNAME                                                              
+------------ ----------                                                         
+           7 Marketing                                                          
+           1 HR                                                                 
+           3 Research                                                           
+           2 Quality                                                            
+           2 IT                                                                 
+
+******************************************************************************************************************************************** 
+
+5.7 List the employees whose experience is more than 5 years
+
+SQL> select ename from emp where current_date-date_join>5;
+
+ENAME                                                                           
+----------                                                                      
+Vamshi                                                                          
+Jake                                                                            
+Kavraj                                                                          
+Arjun                                                                           
+Ravi                                                                            
+RaviRaj                                                                         
+Raghu                                                                           
+Ram                                                                             
+Anmol                                                                           
+Shreya                                                                          
+Manu                                                                            
+Reshma                                                                          
+Aman                                                                            
+Mahesh                                                                          
+Saritha                                                                         
+Varshi                                                                          
+Abay  
+                                                                                                           
+
+17 rows selected.
+
+********************************************************************************************************************************************   
+
+5.8 List the Employees who are born in the month of December
+
+SQL> select ename from emp where to_char(date_birth,'mon')='dec';
+
+ENAME                                                                           
+----------                                                                      
+RaviRaj                                                                         
+Raghu                                                                           
+Ram                                                                             
+Anmol                                                                           
+Manu                                                                            
+Mahesh                                                                          
+Saritha                                                                         
+Varshi                                                                          
+Abay                                                                            
+
+9 rows selected.
+
+********************************************************************************************************************************************   
+(UPDATED 131 AND 132 BIRTH AND JON DATES)
+
+5.9 List the Employees who are born in the year 2000. 
+
+SQL> select ename from emp where to_char(date_birth,'yyyy')=2000;
+
+ENAME
+----------
+Kavraj
+Arjun
+
+********************************************************************************************************************************************   
+
+5.10 Display the DOB of all employees in the format “dd-mm-yy”
+
+SQL> select to_date(date_birth,'dd-mm-yyyy') from emp;
+
+TO_DATE(D                                                                       
+---------                                                                       
+12-SEP-90                                                                       
+11-AUG-92                                                                       
+12-SEP-92                                                                       
+12-SEP-93                                                                       
+10-OCT-85                                                                       
+10-DEC-80                                                                       
+10-DEC-74                                                                       
+10-DEC-70                                                                       
+10-DEC-80                                                                       
+02-OCT-80                                                                       
+10-DEC-80                                                                       
+02-OCT-80                                                                       
+02-OCT-86                                                                       
+10-DEC-74                                                                       
+10-DEC-70                                                                       
+10-DEC-80                                                                       
+10-DEC-80      
+                                                
+
+17 rows selected.
+
+********************************************************************************************************************************************
+5.11 Write SQL query to illustrate ceiling, floor, truncate and round functions on the value 2.83.
+
+SQL> select ceil(2.83),floor(2.83),trunc(2.83),round(2.83) from dual;
+
+CEIL(2.83) FLOOR(2.83) TRUNC(2.83) ROUND(2.83)
+---------- ----------- ----------- -----------
+         3           2           2           3
+
+
+********************************************************************************************************************************************
+
+5.12 List the projects which have duration more than 1 year
+
+SQL> select prj_name from proj where (end_date-strt_date)/365>1;
+
+PRJ_NAME
+----------
+Auomobile
+Stocks
+Stocks
+Retail
+Android
+
+********************************************************************************************************************************************   
+
+5.13 Update the COMM column of EMP table based on the SAL. Use COMM=COMM+SAL*10/100.
+
+SQL> update emp set comm=comm+sal*10/100;
+
+17 rows updated.
+
+********************************************************************************************************************************************
+
+SQL> spool off;

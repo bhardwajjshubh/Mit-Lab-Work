@@ -1,0 +1,75 @@
+6.1  select job,sum(sal) from emp1 group by job;
+6.2  
+6.3  select ename,job from emp1,dept1 where  dept1.Dname IN ('Marketing','Reasearch');
+6.4  select ename,sal from emp1 where sal > (select min(sal) from emp1);
+6.5     select deptno count(ename) from emp1 group by deptno having count(ename)>=3;
+6.6  
+6.7     select dname from dept1,proj where proj.dno = dept1.dno group by dname having count(prj_no)>1;
+6.8  select ename from emp1 where to_char(date_join,'dd')>15;
+6.9  select empno,ename,job from emp1 where job=(select job from emp1 where ename = 'Mahesh');
+6.10 create view EMP_PRJ_VW as select ename,prj_name from emp1,dept1,proj where dname = 'Marketing';
+select * from  EMP_PRJ_VW;
+6.11 select ename,prj_name from EMP_PRJ_VW ;
+6.12 select ename,date_join from emp1 order by date_join asc;
+6.13 
+
+
+
+SELECT Deptno
+FROM emp1
+GROUP BY Deptno
+HAVING AVG(Sal) = (SELECT MAX(AvgSalary) FROM (SELECT Deptno, AVG(Sal) FROM Emp GROUP BY Deptno) );
+
+
+
+6.7  SQL> select dname from dept1,proj where proj.dno = dept1.dno group by dname having count(prj_no)>1;
+
+DNAME
+----------
+Marketing
+
+6.8 SQL> select ename from emp1 where to_char(date_join,'dd')>15;
+
+no rows selected
+
+6.9 SQL> select empno,ename,job from emp1 where job=(select job from emp1 where ename = 'Mahesh');
+
+     EMPNO ENAME      JOB
+---------- ---------- ---------
+       106 Aman       MGR
+       123 Mahesh     MGR
+
+6.10 
+6.11  SQL> select ename,prj_name from EMP_PRJ_VW ;
+
+ENAME      PRJ_NAME
+---------- ----------
+RaviRaj    SHUBHAM
+Raghu      SHUBHAM
+Ram        SHUBHAM
+Anmol      SHUBHAM
+Shreya     SHUBHAM
+Manu       SHUBHAM
+Aman       SHUBHAM
+Mahesh     SHUBHAM
+Saritha    SHUBHAM
+Varshi     SHUBHAM
+Abay       SHUBHAM
+
+6.12  SQL> select ename,date_join from emp1 order by date_join asc;
+
+ENAME      DATE_JOIN
+---------- ---------
+Saritha    02-OCT-85
+Raghu      03-DEC-85
+Ram        03-DEC-90
+RaviRaj    12-NOV-00
+Anmol      02-OCT-01
+Varshi     02-OCT-01
+Mahesh     02-OCT-02
+Aman       02-OCT-02
+Shreya     02-OCT-02
+Manu       02-OCT-02
+Abay       10-DEC-05
+
+6.13 
