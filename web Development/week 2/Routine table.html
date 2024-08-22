@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Routine Document</title>
+   
+    <style>
+        body{
+            border: 2px solid black;
+            padding: 20px;
+            display: inline-block;
+        }
+        table {
+          border-collapse: collapse;
+         }
+         th, td {
+           border: 1px solid black;
+           border-collapse: collapse;
+           padding: 8px;
+           text-align: center;
+         }
+         #one{
+            background-color: rgb(195, 220, 226);
+            
+         }
+         #unique{
+            background-color: white;
+            color: red;
+         }
+         .first-col{
+            background-color: rgb(240, 188, 20);
+         }
+
+         .break-col{
+            background-color: rgb(224, 216, 216);
+         }
+
+         th{
+            font-size: small;
+
+         }
+
+         #first_table{
+            height: 20rem;
+            width: 100rem;
+            border: 2px solid black;
+         }
+         #heading{
+            text-align: center;
+            font-weight:bolder;
+         }
+         #TIMETABLE{
+            text-align: center;
+            font-weight: bold;
+         }
+
+         div{
+            float: left;
+            padding: 15px;
+         }
+         .div2{
+            padding-left: 30rem;
+         }
+         .div3{
+            padding-left: 30rem;
+         }
+
+         footer{
+            text-align: end;
+            font-weight: bold;
+         }
+       </style>
+</head>
+<body>
+
+    <!-- img tag -->
+    <img src="947.jpg" height="100px" widrth="100px" alt="NOt available">
+
+    <p id="heading">DEPARTMENT OF DATA SCIENCE & COMPUTER APPLICATIONS</p>
+    <p id="TIMETABLE">TIMETABLE: JUL - NOV 2023 </p>
+
+    <div class="div1">Semester& Section: I MCA-A</div>
+    <div class="div2">Lecture Hall: AB4 ICL 507</div>
+    <div class="div3">Effective from: July 31, 2023</div>
+
+    <!-- fisrt Table -->
+    <table id="first_table" width="80%">
+
+        <!-- Time table -->
+        <tr id="one">
+            <th id="unique">Regular</th>
+            <th>08:00-9:00</th>
+            <th>09:00-10:00</th>
+            <th>10:00-10:30</th>
+            <th>10:30-11:30</th>
+            <th>11:30-12:30</th>
+            <th>12:30-1:00</th>
+            <th>01:00-02:00</th>
+            <th>02:00-03:00</th>
+            <th>03:00-03:30</th>
+            <th>03:30-04:30</th>
+            <th>04:30-05:30</th>
+        </tr>
+
+        <!-- Monday Routine -->
+        <tr>
+            <th rowspan="2" class="first-col">Mon</th>
+            <th rowspan="2"></th>
+            <th rowspan="2">OOP</th>
+            <th rowspan="2" class="break-col">Break</th>
+            <th rowspan="2">WEB</th>
+            <th rowspan="2">DBMS</th>
+            <th colspan="2" rowspan="2" class="break-col">Lunch Break</th>
+            <th colspan="3" >OOP Lab1-B1 (RH, VR) </th>
+            <th rowspan="2"></th>
+        </tr>
+
+        
+        <tr>
+            <th colspan="3">DBMS Lab2-B2 (AH, RA)</th> 
+
+        </tr>
+
+        
+        <!-- Tuesday Routine -->
+        <tr>
+            <th class="first-col">TUE</th>
+            <th></th>
+            <th colspan="3">RMTC Lab6-B2(DRS,Rk)</th>
+            <th colspan="2" class="break-col">Lunch Break</th>
+            <th>Maths</th>
+            <th>OOP</th>
+            <th class="break-col">Break</th>
+            <th>DBMS*</th>
+            <th></th>
+        </tr>
+
+        <!-- Wednesday routine -->
+        <tr>
+            <th rowspan="2" class="first-col">WED</th>
+            <th rowspan="2"></th>
+            <th rowspan="2">WEB</th>
+            <th rowspan="2" class="break-col">Break</th>
+            <th rowspan="2">Maths</th>
+            <th rowspan="2">DBMS</th>
+            <th colspan="2" rowspan="2" class="break-col">Lunch Break</th>
+            <th colspan="3">DBMS Lab2-B1 (AH, VM)</th>
+            <th rowspan="2"></th>
+        </tr>
+
+        <tr>
+            <th colspan="3">WEB Lab5-B2 (AB, NKN)</th>
+        </tr>
+        
+        
+        <!-- Thrusday Routine -->
+        <tr>
+            <th class="first-col">THU</th>
+            <th></th>
+            <th colspan="3">WEB Lab5-B1(AB,RM)</th>
+            <th colspan="2" class="break-col">Lunch Break</th>
+            <th>OOP</th>
+            <th>RMTC*</th>
+            <th class="break-col">Break</th>
+            <th>WEB</th>
+            <th>DBMS</th>
+        </tr>
+
+        <!-- Friday Routine -->
+        <tr>
+            <th class="first-col">FRI</th>
+            <th>Maths</th>
+            <th>WEB*</th>
+            <th class="break-col">Break</th>
+            <th>OOP</th>
+            <th>RMTC</th>
+            <th colspan="2" class="break-col">Lunch Break</th>
+            <th colspan="3">OOP Lab1-B2 (PPK, RH, RMN)</th>
+            <th></th>
+        </tr>
+
+        <!-- Saturday Routine -->
+        <tr>
+            <th class="first-col">SAT</th>
+            <th></th>
+            <th colspan="3">RMTC Lab6-B1 (DRS, RK)</th>
+            <th colspan="2" class="break-col">Lunch Break</th>
+            <th>WEB</th>
+            <th>DBMS</th>
+            <th class="break-col">Break</th>
+            <th>Maths</th>
+            <th></th>
+        </tr>
+
+        
+    </table>
+
+
+<br><br>
+
+    <!-- Teacher Name with subject -->
+    <table>
+        <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Faculty</th>
+            <th>Subject Code</th>
+            <th>Subject </th>
+            <th>Faculty</th>
+        </tr>
+
+        <tr>
+            <td>MAT 4111</td>
+            <td>Computational Mathematics (Maths)</td>
+            <td>Dr Shobha M E (SME)</td>
+            <td>MCA 4141</td>
+            <td>Database Management System Lab</td>
+            <td>Ms. Archana H(AH)/Mr. Vinayak  M(VM)/Mrs.Rashmi A(RA)</td>
+        </tr>
+
+        <tr>
+            <td>MCA 4121</td>
+            <td>Object Oriented Programming – I(OOP)</td>
+            <td>Dr.Poornima Panduranga K (PPK)</td>
+            <td>MCA 4142</td>
+            <td>Object Oriented Programming lab - I</td>
+            <td>Dr.Poornima P K(PPK)/Dr. Raghuram Holla(RH) /Dr.Vidya Rao(VR)/Mrs.Rashmi M N(RMN)</td>
+        </tr>
+
+        <tr>
+            <td>MCA 4122</td>
+            <td>Database Management System(DBMS)</td>
+            <td>Mr. Vinayak Mantoor (VM)</td>
+            <td>MCA 4143 </td>
+            <td>Web Technologies Lab </td>
+            <td>Mr.Akshay Bhat(AB)/Mr.Nirmal K N(NKN)/Mrs. Rashmi M(RM)</td>
+        </tr>
+
+        <tr>
+            <td>MCA 4123 </td>
+            <td>Web Technologies (WEB) </td>
+            <td>Dr. Girisha S (GS)</td>
+            <td rowspan="2">HUM 5051  </td>
+            <td rowspan="2">RMTC-Lab</td>
+            <td>Dr.Dasharatraj K Shetty(DRS)Dr. Ramakrshina M. </td>
+        </tr>
+
+        <tr>
+            <td>HUM 5051 </td>
+            <td> Research Methodology & Technical Communication (RMTC)</td>
+            <td>(MK)</td>
+            <td>Dr.Dasharatraj K Shetty(DRS) Dr. Ramakrshina M. </td>
+        </tr>
+    </table>
+
+    <p>_______________________________________________________________________________________________________________________________________________________________________________________________</p>
+    <footer>Head of the Department</footer>
+</body>
+</html>
