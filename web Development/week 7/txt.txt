@@ -1,0 +1,129 @@
+// animation EG1
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+body{
+background-color:black;
+}
+.sun{
+	position:absolute;
+	 top:300px;
+     left:300px;
+	 width:300px;
+     height:300px;
+     border-radius:50%;
+     background:yellow
+}
+.moon{
+    position:absolute;
+	left:-200px;
+    top:-200px;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    background: white; 
+    /* animation-iteration-count:infinite;
+    animation-timing-function:linear;
+    animation-name:moonover;
+    animation-duration:5s; */
+ 
+}
+/* @keyframes moonover { 
+0%{left:-200px; top:-200px;}
+100%{left:330px; top:500px; background-color:gray;}
+
+} */
+</style>
+</head>
+<body>
+    <div class="sun">
+        <div class="moon">
+        </div>
+    </div>
+</body>
+</html>
+
+
+//newton
+
+.pendulum{
+  position:absolute; 
+  width: 220px;
+  height: 180px;
+  background-color: #f8c6cf;
+  top:50%;
+  left:50%;
+  border-radius: 5%;
+  align-items: center;
+  border-top: 15px solid #eee7d5;
+  transform: translate(-50%, -50%);
+  border:5px solid green;
+  }
+.pendulum_box{
+  display: flex;
+  padding: 120px 0 0 10px;
+  position: absolute;
+  flex: 1;
+  border:1px solid yellow;
+}
+.ball{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #455681;
+  position: relative;
+  transform-origin: 50% -300%;
+   border:2px solid aqua;
+  
+}
+  .ball::before{
+    content: 'cradle'; 
+    width: 2px;
+    height: 120px;
+    background-color: #fffeff;
+    left: 18px;
+    top: -120px;
+    position: absolute;
+	border:2px solid brown;
+  }
+
+.ball.first{
+  animation: firstball .9s alternate ease-in infinite;
+}
+
+@keyframes firstball{
+  0%{
+    transform: rotate(35deg);
+  }
+  50%{
+    transform: rotate(0deg);
+  }
+}
+
+.ball.last{
+  animation: lastball .9s alternate ease-out infinite;
+}
+
+@keyframes lastball{
+  50%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(-35deg);
+  }
+}
+
+<body>
+<div class="pendulum">
+  <div class="pendulum_box">
+    <div class="ball first"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball last"></div>
+  </div>
+</div>
+</body>
+
